@@ -3,10 +3,9 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {MarkMyProfessorService} from './services/mark-my-professor.service';
 import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
-import {RequestInterceptor} from './services/request-interceptor';
 
 
 @NgModule({
@@ -18,7 +17,7 @@ import {RequestInterceptor} from './services/request-interceptor';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [MarkMyProfessorService, {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, }],
+  providers: [MarkMyProfessorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

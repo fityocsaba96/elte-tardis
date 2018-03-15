@@ -1,3 +1,11 @@
-<p>
-  mark-my-professor works!
-</p>
+<div *ngFor="let professor of professors">
+  <span>
+    Név: {{professor.name}}
+  </span>
+  <span>
+    Értékelés: {{professor.rating}}
+  </span>
+  <span>
+    Iskola: {{professor.school}}
+  </span>
+</div>

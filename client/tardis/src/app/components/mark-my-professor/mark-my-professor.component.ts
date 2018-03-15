@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
+import {Professor} from '../../models/professor';
 
 @Component({
   selector: 'app-mark-my-professor',
@@ -7,14 +8,22 @@ import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
   styleUrls: ['./mark-my-professor.component.css']
 })
 export class MarkMyProfessorComponent implements OnInit {
-  professor: string;
+  searchName: string;
+  professors: Professor[];
 
   constructor(private markMyProfessorService: MarkMyProfessorService) {
   }
 
   ngOnInit() {
-    this.professor = 'Nagy_Sára';
-    this.markMyProfessorService.getData(this.professor);
+    this.searchName = 'Nagy Gábor';
+
+    this.markMyProfessorService.getData(this.searchName)
+      .subscribe(result => {
+          this.professors = this.markMyProfessorService.parseHtml(result);
+        }
+        , err => {
+          console.log(err);
+        });
   }
 
 }
