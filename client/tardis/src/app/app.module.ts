@@ -1,18 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MarkMyProfessorService} from './services/mark-my-professor.service';
+import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
+import {RequestInterceptor} from './services/request-interceptor';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MarkMyProfessorComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MarkMyProfessorService, {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
