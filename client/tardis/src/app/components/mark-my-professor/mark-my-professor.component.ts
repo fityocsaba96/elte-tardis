@@ -17,7 +17,7 @@ export class MarkMyProfessorComponent implements OnInit {
   ngOnInit() {
     this.searchName = 'Nagy Gábor';
 
-    this.markMyProfessorService.getData(this.searchName)
+    this.markMyProfessorService.getData(this.searchName, '1')
       .subscribe(result => {
           this.professors = this.markMyProfessorService.parseHtml(result);
         }

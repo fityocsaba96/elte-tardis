@@ -5,51 +5,42 @@ import {Professor} from '../models/professor';
 @Injectable()
 export class MarkMyProfessorService {
   corsProxy = 'http://localhost:1337/';
-  mmpUrl = this.corsProxy + 'www.markmyprofessor.com/kereses.html?ajax';
+  mmpUrl = 'www.markmyprofessor.com';
+  queryUrl = this.corsProxy + this.mmpUrl + '/kereses.html?ajax';
 
   constructor(private http: HttpClient) {
   }
 
-  getData(searchName: string) {
-    return this.http.get(this.mmpUrl,
+  getData(searchName: string, page: string) {
+    return this.http.get(this.queryUrl,
       {
         responseType: 'text',
         params: new HttpParams()
           .append('type', 'professors')
           .append('word', searchName)
           .append('order', 'school') // order=school query parameterrel nagyobb az esély, hogy az ELTE-sek az első oldalra kerüljenek
+          .append('p', page)
       });
   }
 
   parseHtml(html: string) {
     const professors: Professor[] = [];
-    // tabok, új sorok kitakarítása
-    html = html.replace(/\r\n|\r|\n|\t/g, '');
-    // spliteléssel megvannak a tábla sorai, elsőből és utolsóból még takarítani kell a felesleget
-    const tbody = html.split('<tr class=\"values\">');
-    tbody.splice(0, 1);
-    tbody[tbody.length - 1] = tbody[tbody.length - 1].split('</tbody>')[0];
-    // végigiterálunk a sorokon
-    tbody.forEach(e => {
-      const professor: Professor = {};
-      // sor felbontása oszlopokra
-      const tds = e.split('</td>');
-      // a megfelelő oszlopból kivesszük az iskola rövidítését pl. ELTE-IK
-      professor.school = tds[5].replace('<td align=\"right\">', '').split('>')[1];
-      // még a végéről takarítunk
-      professor.school = professor.school.substring(0, professor.school.length - 3).trim();
-
-      // ha ELTE-s akkor belekerül
-      if (professor.school.startsWith('ELTE')) {
-        // a megfelelő oszlopból kivesszük csak a nevet, végekről takarítás
-        professor.name = tds[2].replace('<td align=\"left\" valign=\"middle\">', '').split('>')[1];
-        professor.name = professor.name.substring(0, professor.name.length - 3).trim();
-        // a megfelelő oszlopból kivesszük az értékelést és számmá alakítjuk
-        professor.rating = Number(tds[4].replace('<td align="center"><strong>', '').replace('</strong>', ''));
-        professors.push(professor);
+    const parser = new DOMParser();
+    const document = parser.parseFromString(html, 'text/html');
+    const table = document.querySelector('tbody');
+    const rows = Array.from(table.querySelectorAll('tr'));
+    rows.forEach(row => {
+      const school = row.cells[5].innerText.trim();
+      if (school.startsWith('ELTE')) {
+        const nameCell = row.querySelector('a');
+        professors.push({
+          name: nameCell.innerText.trim(),
+          link: 'http://' + this.mmpUrl + nameCell.pathname,
+          rating: Number(row.cells[4].innerText.trim()),
+          school: school,
+        });
       }
     });
-    console.log(professors);
     return professors;
   }
 }

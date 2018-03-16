@@ -1,6 +1,6 @@
 <div *ngFor="let professor of professors">
   <span>
-    Név: {{professor.name}}
+    Név: <a target="_blank" href="{{professor.link}}">{{professor.name}}</a>
   </span>
   <span>
     Értékelés: {{professor.rating}}
