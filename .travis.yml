@@ -2,6 +2,8 @@ language: node_js
 
 sudo: false
 
+dist: trusty
+
 cache:
   directories:
     - /client/tardis/node_modules
@@ -9,6 +11,9 @@ cache:
 node_js:
   - node
   - "8.10"
+
+addons:
+  chrome: stable
 
 before_script:
   - cd client/tardis
