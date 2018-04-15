@@ -1,6 +1,11 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
 import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
+import {FormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {MarkMyProfessorService} from './services/mark-my-professor.service';
+import {HttpClientModule} from '@angular/common/http';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -8,6 +13,12 @@ describe('AppComponent', () => {
         AppComponent,
         MarkMyProfessorComponent,
       ],
+      imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+      ],
+      providers: [MarkMyProfessorService],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
