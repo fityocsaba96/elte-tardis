@@ -12,7 +12,7 @@ node_js:
 
 before_script:
   - cd client/tardis
-  - npm install -g --silent @angular/cli
+  - npm install
 
 script:
   - npm run test
