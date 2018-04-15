@@ -1,6 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MarkMyProfessorComponent } from './mark-my-professor.component';
+import {MarkMyProfessorComponent} from './mark-my-professor.component';
+import {FormsModule} from '@angular/forms';
+import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('MarkMyProfessorComponent', () => {
   let component: MarkMyProfessorComponent;
@@ -8,9 +11,11 @@ describe('MarkMyProfessorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MarkMyProfessorComponent ]
+      declarations: [MarkMyProfessorComponent],
+      imports: [FormsModule, HttpClientModule],
+      providers: [MarkMyProfessorService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

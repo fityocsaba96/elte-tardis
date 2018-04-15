@@ -1,10 +1,12 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
 import {MarkMyProfessorService} from './mark-my-professor.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('MarkMyProfessorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       providers: [MarkMyProfessorService]
     });
   });
