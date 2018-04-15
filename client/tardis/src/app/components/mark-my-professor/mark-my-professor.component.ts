@@ -16,6 +16,25 @@ export class MarkMyProfessorComponent implements OnInit {
   filteredProfessors: Professor[];
   numberOfPages: number;
 
+  static stripName(rawName) {
+    const bracketIndex = rawName.indexOf('(');
+    let name = bracketIndex === -1 ? rawName : rawName.substr(0, bracketIndex);
+    const names = name.split(' ');
+    let dotIndex;
+    for (let i = 0; i < names.length; i++) {
+      if (names[i].includes('.')) {
+        dotIndex = i;
+      }
+    }
+    if (dotIndex < names.length / 2) {
+      name = `${names[dotIndex + 1]} ${names[dotIndex + 2]}`;
+    } else {
+      name = `${names[0]} ${names[1]}`;
+    }
+    return name;
+  }
+
+
   constructor(private markMyProfessorService: MarkMyProfessorService) {
   }
 
@@ -33,7 +52,7 @@ export class MarkMyProfessorComponent implements OnInit {
   }
 
   getProfessors(rating?: number) {
-    return this.professors.filter(p => p.rating >= rating);
+    return rating ? this.professors.filter(p => p.rating >= rating) : this.professors;
   }
 
   findProfessor(professorName: string) {
@@ -44,20 +63,7 @@ export class MarkMyProfessorComponent implements OnInit {
     if (this.findProfessor(professorName) !== undefined) {
       return;
     }
-    professorName = professorName.toLowerCase();
-    if (professorName.startsWith('prof.')) {
-      professorName = professorName.substr(6, professorName.length).trim();
-    }
-    if (professorName.startsWith('dr.')) {
-      professorName = professorName.substr(4, professorName.length).trim();
-    }
-    if (professorName.endsWith('dr.')) {
-      professorName = professorName.substr(0, professorName.length - 4).trim();
-    }
-    if (professorName.endsWith('prof.')) {
-      professorName = professorName.substr(0, professorName.length - 6).trim();
-    }
-    console.log(professorName);
+    professorName = MarkMyProfessorComponent.stripName(professorName);
     this.markMyProfessorService.getData(professorName, page)
       .subscribe(firstPage => {
         this.checkNumberOfPages(this.parseHtml(firstPage, faculty));

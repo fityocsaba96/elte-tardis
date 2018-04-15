@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
+import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MarkMyProfessorService} from './services/mark-my-professor.service';
 import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
@@ -15,7 +16,8 @@ import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-p
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [MarkMyProfessorService],
   bootstrap: [AppComponent]

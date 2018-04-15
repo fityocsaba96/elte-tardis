@@ -3,6 +3,9 @@
     {{faculty}}
   </option>
 </select>
+<div>
+  Name: <input [(ngModel)]="searchName" >
+</div>
 <button (click)="getRatingFor(searchName, selectedFaculty, '1')">Search</button>
 <div *ngFor="let professor of professors">
   <span>
