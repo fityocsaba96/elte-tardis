@@ -1,3 +1,9 @@
+<select #selectFaculty (change)="selectedFaculty = selectFaculty.value">
+  <option *ngFor="let faculty of faculties">
+    {{faculty}}
+  </option>
+</select>
+<button (click)="getRatingFor(searchName, selectedFaculty, '1')">Search</button>
 <div *ngFor="let professor of professors">
   <span>
     Név: <a target="_blank" href="{{professor.link}}">{{professor.name}}</a>
