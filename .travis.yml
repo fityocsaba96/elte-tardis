@@ -1,0 +1,23 @@
+language: node_js
+
+sudo: false
+
+cache:
+  directories:
+    - /client/tardis/node_modules
+
+node_js:
+  - node
+  - "8.10"
+
+before_script:
+  - npm install -g --silent @angular/cli
+
+script:
+  - npm run test
+  - npm run build
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
