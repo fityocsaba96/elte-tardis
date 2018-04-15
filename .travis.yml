@@ -6,7 +6,7 @@ dist: trusty
 
 cache:
   directories:
-    - /client/tardis/node_modules
+    - client/tardis/node_modules
 
 node_js:
   - node
@@ -20,7 +20,7 @@ before_script:
   - npm install
 
 script:
-  - npm run test
+  - npm run test-travis
   - npm run build
 
 notifications:
