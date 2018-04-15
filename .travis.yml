@@ -1,0 +1,29 @@
+language: node_js
+
+sudo: false
+
+dist: trusty
+
+cache:
+  directories:
+    - client/tardis/node_modules
+
+node_js:
+  - node
+  - "8.10"
+
+addons:
+  chrome: stable
+
+before_script:
+  - cd client/tardis
+  - npm install
+
+script:
+  - npm run test-travis
+  - npm run build
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
