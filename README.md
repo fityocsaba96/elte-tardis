@@ -1,5 +1,7 @@
 # TARDIS
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fityocsaba96/elte-tardis.svg)](https://greenkeeper.io/)
+
 Optimális órarend készítő webalkalmazás az ELTE lágymányosi karainak használatára
 
 ### Mi ez?
