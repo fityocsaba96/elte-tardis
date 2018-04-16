@@ -23,6 +23,17 @@ script:
   - npm run test-travis
   - npm run build
 
+before_deploy:
+  - cd dist
+  - echo '{}' > composer.json
+  - cp ../../../server/tardis-proxy/src/*.php .
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: xrDKrJScJBJvthzkOPhNDThmgM/eA+hlH3XdE9R8PlEkZ/xplaLFEPas1DAF/dn5Pgeqy1yIlGvG9Fa9cUQHN3IPM+r+h5Y7EX6Z9IaB+UrbLvbIVI3tXQ0MY5PEeo2XF5Wdt6aNIeakDsSbGpUZs34j1cjhk5WS6XqIqQU+28RoEClkAHZ/wfEwfYQJxAWWANwZeE/p/63GmIJBEMCyzFG1/FWGmBR0ZQRZV+QsHmRwsrwn1CHyfPrZQHp9U9bf+qfbNwORHQIkzhL9PD/KIib+iTHBo6RGAIsGQ0wdNYaFlOdgn13vzP2WeHSfaE5xWF84sUDLwtoDXC/XIZAoCBuLadysb6D7Q1h4cWmalw+vN9JJb4oCGxTsMsEXyC/BxAvfr9C3eKui/j/KZ7dRpBTIuxNgNPH8EpP4UbZQlHcYY5ZrFNLpRCZ9RBP2VXa+ybeX6oCxol8mAbaH2mAZZqGLjDs+5VIieXtb6ZKcaGSqIyXsT4gcC2kn+ns24FcPMZaniOdJgL1SoMCZpRe8u6CNIyJbQplE4z7izlrZau5xwnFA/vp2MGNzmO9Ut1+4iGW5NIvVB43vgaoPReGlwJxuA9u2y9k/sIOuMga6AL9GzfflkIYS+6LP58BmpkAJuMGsm6UQ2OwGgJ9fBc9V+UIgBhiRiiO+kPu/pMBQuII=
+  skip_cleanup: true
+
 notifications:
   email:
     on_failure: change
