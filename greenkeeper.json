@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "client/tardis/package.json"
+      ]
+    }
+  }
+}
