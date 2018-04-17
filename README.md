@@ -1,6 +1,8 @@
 # TARDIS
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/fityocsaba96/elte-tardis.svg)](https://greenkeeper.io/)
+[![Travis CI](https://travis-ci.org/fityocsaba96/elte-tardis.svg?branch=master)](https://travis-ci.org/fityocsaba96/elte-tardis)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=elte-tardis&svg=1)](https://elte-tardis.herokuapp.com/)
+[![Greenkeeper](https://badges.greenkeeper.io/fityocsaba96/elte-tardis.svg)](https://greenkeeper.io/)
 
 Optimális órarend készítő webalkalmazás az ELTE lágymányosi karainak használatára
 
