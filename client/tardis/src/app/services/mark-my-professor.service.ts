@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MarkMyProfessorService {
@@ -13,7 +13,7 @@ export class MarkMyProfessorService {
         responseType: 'text',
         params: new HttpParams()
           .append('name', searchName)
-          .append('page', page)
+          .append('page', page),
       });
   }
 

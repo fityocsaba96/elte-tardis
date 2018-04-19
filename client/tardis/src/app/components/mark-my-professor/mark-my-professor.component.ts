@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
+import {IProfessor} from '../../models/IProfessor';
 import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
-import {Professor} from '../../models/professor';
 
 @Component({
   selector: 'app-mark-my-professor',
   templateUrl: './mark-my-professor.component.html',
-  styleUrls: ['./mark-my-professor.component.css']
+  styleUrls: ['./mark-my-professor.component.css'],
 })
 export class MarkMyProfessorComponent implements OnInit {
   mmpUrl = 'www.markmyprofessor.com/';
   searchName: string;
   faculties: string[];
   selectedFaculty: string;
-  professors: Professor[];
-  filteredProfessors: Professor[];
+  professors: IProfessor[];
+  filteredProfessors: IProfessor[];
   numberOfPages: number;
 
   static stripName(rawName) {
@@ -34,7 +34,6 @@ export class MarkMyProfessorComponent implements OnInit {
     return name;
   }
 
-
   constructor(private markMyProfessorService: MarkMyProfessorService) {
   }
 
@@ -43,7 +42,7 @@ export class MarkMyProfessorComponent implements OnInit {
     this.faculties = [
       'ELTE-IK',
       'ELTE-TTK',
-      'ELTE-TÁTK'
+      'ELTE-TÁTK',
     ];
     this.selectedFaculty = 'ELTE-IK';
     this.professors = [];
@@ -52,11 +51,11 @@ export class MarkMyProfessorComponent implements OnInit {
   }
 
   getProfessors(rating?: number) {
-    return rating ? this.professors.filter(p => p.rating >= rating) : this.professors;
+    return rating ? this.professors.filter((p) => p.rating >= rating) : this.professors;
   }
 
   findProfessor(professorName: string) {
-    return this.professors.find(p => p.name.includes(professorName));
+    return this.professors.find((p) => p.name.includes(professorName));
   }
 
   getRatingFor(professorName: string, faculty: string, page: string) {
@@ -65,19 +64,19 @@ export class MarkMyProfessorComponent implements OnInit {
     }
     professorName = MarkMyProfessorComponent.stripName(professorName);
     this.markMyProfessorService.getData(professorName, page)
-      .subscribe(firstPage => {
+      .subscribe((firstPage) => {
         this.checkNumberOfPages(this.parseHtml(firstPage, faculty));
         if (this.numberOfPages > 1) {
           for (let i = 2; i <= this.numberOfPages; ++i) {
             this.markMyProfessorService.getData(professorName, i.toString())
-              .subscribe(otherPage => {
+              .subscribe((otherPage) => {
                 this.parseHtml(otherPage, faculty);
-              }, err => {
+              }, (err) => {
                 console.log(err);
               });
           }
         }
-      }, err => {
+      }, (err) => {
         console.log(err);
       });
   }
@@ -90,7 +89,7 @@ export class MarkMyProfessorComponent implements OnInit {
       return;
     }
     const rows = Array.from(table.querySelectorAll('tr'));
-    rows.forEach(row => {
+    rows.forEach((row) => {
       const school = row.cells[5].innerText.trim();
       const rating = Number(row.cells[4].innerText.trim());
       if (school === faculty && rating > 0.0) {
@@ -98,8 +97,8 @@ export class MarkMyProfessorComponent implements OnInit {
         this.professors.push({
           name: nameCell.innerText.trim(),
           link: 'http://' + this.mmpUrl + nameCell.pathname,
-          rating: rating,
-          school: school,
+          rating,
+          school,
         });
       }
     });
@@ -114,7 +113,7 @@ export class MarkMyProfessorComponent implements OnInit {
     const pager = document.querySelector('div[class=pager]');
     if (pager != null) {
       const pages = Array.from(pager.querySelectorAll('a'));
-      pages.forEach(page => {
+      pages.forEach((page) => {
         if (!Number.isNaN(Number.parseInt(page.innerHTML.trim()))) {
           this.numberOfPages += 1;
         }

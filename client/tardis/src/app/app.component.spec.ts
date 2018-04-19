@@ -1,10 +1,10 @@
+import {HttpClientModule} from '@angular/common/http';
 import {async, TestBed} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
 import {MarkMyProfessorService} from './services/mark-my-professor.service';
-import {HttpClientModule} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

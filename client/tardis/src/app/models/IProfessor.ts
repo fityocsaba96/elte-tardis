@@ -1,4 +1,4 @@
-export interface Professor {
+export interface IProfessor {
   name?: string;
   link?: string;
   rating?: number;
