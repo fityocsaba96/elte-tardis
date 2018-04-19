@@ -1,5 +1,7 @@
 <?php
 
+ob_start();
+
 $url = 'http://www.markmyprofessor.com/kereses.html?';
 $data = array(
     'ajax'  => '',
@@ -10,6 +12,11 @@ $data = array(
 );
 $url .= http_build_query($data);
 $response = file_get_contents($url);
-echo $response;
+
+if (strpos($http_response_header[0], '200') !== false) {
+    echo $response;
+} else {
+    header($http_response_header[0]);
+}
 
 ?>

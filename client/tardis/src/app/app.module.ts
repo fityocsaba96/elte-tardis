@@ -21,6 +21,12 @@ import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-p
   ],
   providers: [MarkMyProfessorService],
   bootstrap: [AppComponent]
+  ],
+  imports: [
+    BrowserModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
