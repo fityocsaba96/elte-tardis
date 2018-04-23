@@ -9,7 +9,7 @@ export class AddingSubjectService {
 
     semester =  '2017-2018-2';
     public getData(search: string) {
-        return this.http.get('/ttk-to.php/',
+        return this.http.get('/ttk-to.php',
         {
           responseType: 'text',
           params: new HttpParams()

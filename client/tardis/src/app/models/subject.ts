@@ -1,14 +1,13 @@
 export interface Subject {
     kurzusnev: string;
-    kurzuskod: string;
+    /*kurzuskod: string;
     idopont: string;
-    helyszin: string;
-    hetek: string;
-    megj: string;
+    helyszin: string;*/
+    /*megj: string;
     oratipus: string;
     csop: string;
     letszam: string;
     ea: string;
     gyak: string;
-    oktato: string;
+    oktato: string;*/
 }
