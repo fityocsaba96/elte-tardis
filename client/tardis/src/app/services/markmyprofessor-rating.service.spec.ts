@@ -1,17 +1,17 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {HttpClientModule} from '@angular/common/http';
-import {MarkMyProfessorService} from './mark-my-professor.service';
+import {MarkmyprofessorRatingService} from './markmyprofessor-rating.service';
 
-describe('MarkMyProfessorService', () => {
+describe('MarkmyprofessorRatingService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [MarkMyProfessorService],
+      providers: [MarkmyprofessorRatingService],
     });
   });
 
-  it('should be created', inject([MarkMyProfessorService], (service: MarkMyProfessorService) => {
+  it('should be created', inject([MarkmyprofessorRatingService], (service: MarkmyprofessorRatingService) => {
     expect(service).toBeTruthy();
   }));
 });

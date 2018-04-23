@@ -1,0 +1,17 @@
+<div class="header">
+  <div class="title">
+    TARDIS {{selectedFaculty}}
+    <span style="font-size: smaller">Optimális órarend készítő</span>
+  </div>
+  <div>
+    <div class="ui breadcrumb">
+      <div style="cursor: pointer"
+           *ngFor="let faculty of faculties"
+           [ngClass]="selectedFaculty === faculty ? 'active section' : 'section'"
+           (click)="onFacultySelect(faculty)">
+        {{faculty}}
+        <div class="divider" *ngIf="faculty !== faculties[faculties.length -1]"> /</div>
+      </div>
+    </div>
+  </div>
+</div>

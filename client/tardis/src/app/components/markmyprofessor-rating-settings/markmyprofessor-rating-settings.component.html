@@ -1,20 +1,10 @@
-<select #selectFaculty (change)="selectedFaculty = selectFaculty.value">
-  <option *ngFor="let faculty of faculties">
-    {{faculty}}
-  </option>
-</select>
 <div>
-  Name: <input [(ngModel)]="searchName" >
+  <sui-checkbox [(ngModel)]="isApplied" (ngModelChange)="onCheckboxChange()">
+    Oktatók minimális MarkMyProfessor átlagértékelése
+  </sui-checkbox>
+  <div>
+    Értékelés:
+    <input [(ngModel)]="minimumRating" (ngModelChange)="onRatingChange()">
+  </div>
 </div>
-<button (click)="getRatingFor(searchName, selectedFaculty, '1')">Search</button>
-<div *ngFor="let professor of professors">
-  <span>
-    Név: <a target="_blank" href="{{professor.link}}">{{professor.name}}</a>
-  </span>
-  <span>
-    Értékelés: {{professor.rating}}
-  </span>
-  <span>
-    Iskola: {{professor.school}}
-  </span>
-</div>
+

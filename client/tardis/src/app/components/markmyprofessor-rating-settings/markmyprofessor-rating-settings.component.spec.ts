@@ -2,7 +2,9 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
+import {SuiModule} from 'ng2-semantic-ui';
+import {FacultyService} from '../../services/faculty.service';
+import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
 import {MarkmyprofessorRatingSettingsComponent} from './markmyprofessor-rating-settings.component';
 
 describe('MarkmyprofessorRatingSettingsComponent', () => {
@@ -12,8 +14,8 @@ describe('MarkmyprofessorRatingSettingsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MarkmyprofessorRatingSettingsComponent],
-      imports: [FormsModule, HttpClientModule],
-      providers: [MarkMyProfessorService],
+      imports: [FormsModule, HttpClientModule, SuiModule],
+      providers: [MarkmyprofessorRatingService, FacultyService],
     })
       .compileComponents();
   }));
