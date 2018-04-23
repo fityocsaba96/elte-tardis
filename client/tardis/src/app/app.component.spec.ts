@@ -3,7 +3,7 @@ import {async, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
+import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {MarkMyProfessorService} from './services/mark-my-professor.service';
 
 describe('AppComponent', () => {
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        MarkMyProfessorComponent,
+        MarkmyprofessorRatingSettingsComponent,
       ],
       imports: [
         BrowserModule,

@@ -4,13 +4,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
-import {MarkMyProfessorComponent} from './components/mark-my-professor/mark-my-professor.component';
+import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {MarkMyProfessorService} from './services/mark-my-professor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MarkMyProfessorComponent,
+    MarkmyprofessorRatingSettingsComponent,
   ],
   imports: [
     BrowserModule,

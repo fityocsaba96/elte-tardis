@@ -3,15 +3,15 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
-import {MarkMyProfessorComponent} from './mark-my-professor.component';
+import {MarkmyprofessorRatingSettingsComponent} from './markmyprofessor-rating-settings.component';
 
-describe('MarkMyProfessorComponent', () => {
-  let component: MarkMyProfessorComponent;
-  let fixture: ComponentFixture<MarkMyProfessorComponent>;
+describe('MarkmyprofessorRatingSettingsComponent', () => {
+  let component: MarkmyprofessorRatingSettingsComponent;
+  let fixture: ComponentFixture<MarkmyprofessorRatingSettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkMyProfessorComponent],
+      declarations: [MarkmyprofessorRatingSettingsComponent],
       imports: [FormsModule, HttpClientModule],
       providers: [MarkMyProfessorService],
     })
@@ -19,7 +19,7 @@ describe('MarkMyProfessorComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MarkMyProfessorComponent);
+    fixture = TestBed.createComponent(MarkmyprofessorRatingSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

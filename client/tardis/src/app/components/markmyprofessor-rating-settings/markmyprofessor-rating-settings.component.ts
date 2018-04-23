@@ -4,10 +4,10 @@ import {MarkMyProfessorService} from '../../services/mark-my-professor.service';
 
 @Component({
   selector: 'app-mark-my-professor',
-  templateUrl: './mark-my-professor.component.html',
-  styleUrls: ['./mark-my-professor.component.css'],
+  templateUrl: './markmyprofessor-rating-settings.component.html',
+  styleUrls: ['./markmyprofessor-rating-settings.component.css'],
 })
-export class MarkMyProfessorComponent implements OnInit {
+export class MarkmyprofessorRatingSettingsComponent implements OnInit {
   mmpUrl = 'www.markmyprofessor.com/';
   searchName: string;
   faculties: string[];
@@ -62,7 +62,7 @@ export class MarkMyProfessorComponent implements OnInit {
     if (this.findProfessor(professorName) !== undefined) {
       return;
     }
-    professorName = MarkMyProfessorComponent.stripName(professorName);
+    professorName = MarkmyprofessorRatingSettingsComponent.stripName(professorName);
     this.markMyProfessorService.getData(professorName, page)
       .subscribe((firstPage) => {
         this.checkNumberOfPages(this.parseHtml(firstPage, faculty));
