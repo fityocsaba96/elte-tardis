@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
     this.faculties = [
       'IK', 'TTK', 'TÁTK',
     ];
-    this.selectedFaculty = this.faculties[0];
   }
 
   onFacultySelect(faculty: string) {

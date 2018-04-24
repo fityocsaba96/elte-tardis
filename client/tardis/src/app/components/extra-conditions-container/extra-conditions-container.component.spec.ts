@@ -5,15 +5,16 @@ import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {FacultyService} from '../../services/faculty.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
-import {MarkmyprofessorRatingSettingsComponent} from './markmyprofessor-rating-settings.component';
+import {MarkmyprofessorRatingSettingsComponent} from '../markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
+import {ExtraConditionsContainerComponent} from './extra-conditions-container.component';
 
-describe('MarkmyprofessorRatingSettingsComponent', () => {
-  let component: MarkmyprofessorRatingSettingsComponent;
-  let fixture: ComponentFixture<MarkmyprofessorRatingSettingsComponent>;
+describe('ExtraConditionsContainerComponent', () => {
+  let component: ExtraConditionsContainerComponent;
+  let fixture: ComponentFixture<ExtraConditionsContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkmyprofessorRatingSettingsComponent],
+      declarations: [ExtraConditionsContainerComponent, MarkmyprofessorRatingSettingsComponent],
       imports: [HttpClientModule, FormsModule, SuiModule],
       providers: [MarkmyprofessorRatingService, FacultyService],
     })
@@ -21,7 +22,7 @@ describe('MarkmyprofessorRatingSettingsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MarkmyprofessorRatingSettingsComponent);
+    fixture = TestBed.createComponent(ExtraConditionsContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

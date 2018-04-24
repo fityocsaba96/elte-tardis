@@ -1,15 +1,18 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {IProfessor} from '../models/IProfessor';
+import {FacultyService} from './faculty.service';
 
 @Injectable()
 export class MarkmyprofessorRatingService {
 
+  private originalName: string;
   private professors: IProfessor[];
   private hasNextPage: boolean;
   private nextPage: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private facultyService: FacultyService) {
     this.professors = [];
   }
 
@@ -43,14 +46,15 @@ export class MarkmyprofessorRatingService {
       });
   }
 
-  getRatingFor(professorName: string, faculty: string) {
+  getRatingFor(professorName: string) {
     if (this.exists(professorName)) {
       return;
     }
-    professorName = MarkmyprofessorRatingService.stripName(professorName);
+    this.originalName = professorName;
+    const searchName = MarkmyprofessorRatingService.stripName(professorName);
     this.hasNextPage = true;
     this.nextPage = 0;
-    this.sendRequest(professorName, faculty);
+    this.sendRequest(searchName, this.facultyService.getSelectedFaculty());
   }
 
   sendRequest(professorName: string, faculty: string) {
@@ -78,12 +82,13 @@ export class MarkmyprofessorRatingService {
       const school = row.cells[5].innerText.trim();
       const rating = Number(row.cells[4].innerText.trim());
       if (school === faculty && Number.isFinite(rating) && rating > 0.0) {
-        const nameCell = row.querySelector('a');
         this.addProfessor({
-          name: nameCell.innerText.trim(),
+          name: this.originalName,
           rating,
           school,
         });
+        this.hasNextPage = false;
+        return;
       }
     });
     const pager = document.querySelector('div[class=pager]');
@@ -94,14 +99,19 @@ export class MarkmyprofessorRatingService {
     } else {
       this.hasNextPage = false;
     }
-    return document;
   }
 
   addProfessor(professor: IProfessor) {
     this.professors.push(professor);
   }
 
-  getProfessors(faculty?: string, rating?: number): IProfessor[] {
+  findProfessorAboveRating(professorName: string, rating: number): IProfessor {
+    const faculty = this.facultyService.getSelectedFaculty();
+    return this.professors.find((p) => p.school.includes(faculty) && p.name === professorName && p.rating >= rating);
+  }
+
+  filterProfessors(rating?: number): IProfessor[] {
+    const faculty = this.facultyService.getSelectedFaculty();
     return this.professors.filter((p) => p.school.includes(faculty) && p.rating >= rating);
   }
 

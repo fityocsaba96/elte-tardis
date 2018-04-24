@@ -6,7 +6,6 @@ export class FacultyService {
   private selectedFaculty: string;
 
   constructor() {
-    this.selectedFaculty = 'ELTE-IK';
   }
 
   selectFaculty(selectedFaculty) {

@@ -5,6 +5,8 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
+import {ContentComponent} from './components/content/content.component';
+import {ExtraConditionsContainerComponent} from './components/extra-conditions-container/extra-conditions-container.component';
 import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
@@ -16,6 +18,8 @@ import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.se
     AppComponent,
     MarkmyprofessorRatingSettingsComponent,
     HeaderComponent,
+    ContentComponent,
+    ExtraConditionsContainerComponent,
   ],
   imports: [
     BrowserModule,
