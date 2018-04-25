@@ -1,0 +1,10 @@
+<div>
+  <sui-checkbox [(ngModel)]="isApplied" (ngModelChange)="onCheckboxChange()">
+    Oktatók minimális MarkMyProfessor átlagértékelése
+  </sui-checkbox>
+  <div>
+    Értékelés:
+    <input [(ngModel)]="minimumRating" (ngModelChange)="onRatingChange()">
+  </div>
+</div>
+
