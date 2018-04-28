@@ -1,18 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IPopup} from 'ng2-semantic-ui';
-
-enum Day {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-}
-
-interface IDayOption {
-  day: Day;
-  name: string;
-}
+import {Day} from '../../models/Day';
 
 @Component({
   selector: 'app-add-free-time',
@@ -21,29 +9,23 @@ interface IDayOption {
 })
 export class AddFreeTimeComponent implements OnInit {
 
-  private dayOptions: IDayOption[] = [
-    { day: Day.Monday, name: 'hétfő' },
-    { day: Day.Tuesday, name: 'kedd' },
-    { day: Day.Wednesday, name: 'szerda' },
-    { day: Day.Thursday, name: 'csütörtök' },
-    { day: Day.Friday, name: 'péntek' },
-  ];
+  dayOptions: Day[] = [Day.Monday, Day.Tuesday, Day.Wednesday, Day.Thursday, Day.Friday];
 
-  private name: string;
-  private selectedDay: Day;
-  private startDate: Date;
-  private endDate: Date;
+  name: string;
+  selectedDay: Day;
+  startDate: Date;
+  endDate: Date;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  /*private dateToTimeString(date: Date) { // TODO: move to service
+  /*dateToTimeString(date: Date) { // TODO: move to service
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   }*/
 
-  private addFreeTime(popup: IPopup) {
+  addFreeTime(popup: IPopup) {
     if (!this.name || this.name.length === 0 || !this.selectedDay || !this.startDate || !this.endDate) {
       popup.open();
     } else {
