@@ -1,0 +1,7 @@
+table,tr,td {
+    margin: auto;
+    width: 70%;
+    padding: 5px;
+    border-bottom-color: black;
+    border-style: solid; 
+  }
