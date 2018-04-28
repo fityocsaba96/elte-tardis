@@ -1,0 +1,7 @@
+.narrow-input {
+    width: 120px;
+}
+
+.ui.selection.dropdown {
+    min-width: unset !important;
+}

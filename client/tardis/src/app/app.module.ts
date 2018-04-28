@@ -5,6 +5,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
+import {AddFreeTimeComponent} from './components/add-free-time/add-free-time.component';
 import {ContentComponent} from './components/content/content.component';
 import {ExtraConditionsContainerComponent} from './components/extra-conditions-container/extra-conditions-container.component';
 import {HeaderComponent} from './components/header/header.component';
@@ -20,6 +21,7 @@ import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.se
     HeaderComponent,
     ContentComponent,
     ExtraConditionsContainerComponent,
+    AddFreeTimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,10 @@ import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.se
     FormsModule,
     SuiModule,
   ],
-  providers: [MarkmyprofessorRatingService, FacultyService],
+  providers: [
+    MarkmyprofessorRatingService,
+    FacultyService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
