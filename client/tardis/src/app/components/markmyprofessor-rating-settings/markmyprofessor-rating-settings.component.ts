@@ -24,6 +24,9 @@ export class MarkmyprofessorRatingSettingsComponent implements OnInit {
   }
 
   onRatingChange() {
+    if (this.isApplied) {
+
+    }
     console.log(this.minimumRating);
   }
 
