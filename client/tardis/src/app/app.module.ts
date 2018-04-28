@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 import {AddFreeTimeComponent} from './components/add-free-time/add-free-time.component';
 import {ContentComponent} from './components/content/content.component';
 import {ExtraConditionsContainerComponent} from './components/extra-conditions-container/extra-conditions-container.component';
+import {FreeTimeSettingsComponent} from './components/free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from './components/free-time-table/free-time-table.component';
 import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
@@ -24,6 +25,7 @@ import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.se
     ExtraConditionsContainerComponent,
     AddFreeTimeComponent,
     FreeTimeTableComponent,
+    FreeTimeSettingsComponent,
   ],
   imports: [
     BrowserModule,
