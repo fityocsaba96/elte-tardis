@@ -8,6 +8,7 @@ import {FacultyService} from './faculty.service';
 export class MarkmyprofessorRatingService {
 
   private professors: IProfessor[];
+  private minimumRating: number;
   private originalName: string;
   private hasNextPage: boolean;
   private nextPage: number;
@@ -17,6 +18,7 @@ export class MarkmyprofessorRatingService {
               private facultyService: FacultyService) {
     this.professors = [];
     this.parser = new DOMParser();
+    this.minimumRating = 0;
   }
 
   static stripName(rawName) {
@@ -39,9 +41,13 @@ export class MarkmyprofessorRatingService {
     return name;
   }
 
-  filterProfessors(rating?: number): IProfessor[] {
+  setMinimumRating(rating: number) {
+    this.minimumRating = rating;
+  }
+
+  filterProfessors(): IProfessor[] {
     const faculty = this.facultyService.getSelectedFaculty();
-    return this.professors.filter((p) => p.faculty === faculty && p.rating >= rating);
+    return this.professors.filter((p) => p.faculty === faculty && p.rating >= this.minimumRating);
   }
 
   exists(professorName: string): boolean {

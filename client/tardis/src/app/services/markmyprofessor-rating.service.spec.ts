@@ -29,30 +29,38 @@ describe('MarkmyprofessorRatingService', () => {
     expect(mmpService).toBeTruthy();
   });
 
-  it('should return true if exists', () => {
-    (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
-    expect(mmpService.exists(professorName)).toBeTruthy();
+  describe('filterProfessors', () => {
+    it('should filter out professors below rating', () => {
+      (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
+      mmpService.setMinimumRating(4.5);
+      expect(mmpService.filterProfessors()).toEqual([]);
+    });
+
+    it('should include professors above rating', () => {
+      (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
+      mmpService.setMinimumRating(4.0);
+      expect(mmpService.filterProfessors()).toBeTruthy();
+    });
   });
 
-  it('should return false if not exists', () => {
-    expect(mmpService.exists(professorName)).toBeFalsy();
+  describe('exists', () => {
+    it('should return true if already looked up', () => {
+      (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
+      expect(mmpService.exists(professorName)).toBeTruthy();
+    });
+
+    it('should return false if not looked up yet', () => {
+      expect(mmpService.exists(professorName)).toBeFalsy();
+    });
   });
 
-  it('should filter professors below rating', () => {
-    (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
-    expect(mmpService.filterProfessors(4.5)).toEqual([]);
+  describe('getRatingFor', () => {
+    it('should update professors', async(inject([HttpTestingController], (httpMock) => {
+      mmpService.getRatingFor(professorName);
+      httpMock.expectOne((req) => req.method === 'GET' && req.url.includes('mark-my-professor.php'))
+        .flush(exampleResponse, {headers: {'Content-Type': 'text/html'}});
+      expect(mmpService.exists(professorName)).toBeTruthy();
+    })));
   });
-
-  it('should filter professors above rating', () => {
-    (mmpService as any).professors.push({name: professorName, rating: 4.0, faculty: 'ELTE-IK'});
-    expect(mmpService.filterProfessors(4.0)).toBeTruthy();
-  });
-
-  it('should update professors', async(inject([HttpTestingController], (httpMock) => {
-    mmpService.getRatingFor(professorName);
-    httpMock.expectOne((req) => req.method === 'GET' && req.url.includes('mark-my-professor.php'))
-      .flush(exampleResponse, {headers: {'Content-Type': 'text/html'}});
-    expect(mmpService.exists(professorName)).toBeTruthy();
-  })));
 
 });

@@ -1,11 +1,11 @@
 <div>
-  <sui-checkbox [(ngModel)]="isApplied" style="margin: 5px">
+  <sui-checkbox [(ngModel)]="isApplied" style="margin: 5px" (ngModelChange)="setApplied()">
     Oktatók minimális MarkMyProfessor átlagértékelése
   </sui-checkbox>
   <div>
     Értékelés:
     <div class="ui small input" style="margin: 5px">
-      <input type="number" step="0.1" min="0" max="5" [(ngModel)]="minimumRating">
+      <input type="number" step="0.1" min="0" max="5" [(ngModel)]="minimumRating" (ngModelChange)="updateRating()">
     </div>
   </div>
 </div>
