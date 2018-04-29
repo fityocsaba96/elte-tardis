@@ -11,12 +11,17 @@ import { Subject } from "../../../models/subject";
 export class SearchedSubjectTable implements OnInit{
   
   subjects: Subject[];
+  hidden: boolean;
 
   constructor(private searchSubjectService: SubjectService) {
     this.subjects = searchSubjectService.getSearchSubject();
+    if(this.subjects.length > 0) {
+      this.hidden = false;
+    }
    }
 
   ngOnInit() {
+    this.hidden = true;
   }
 
   sendSubjectToAddTable(subject: Subject) {

@@ -12,13 +12,18 @@ export class AddedSubjectTable implements OnInit{
   
   subjects: Subject[];
   conflicts: Subject[];
+  hidden: boolean;
 
   constructor(private SubjectService: SubjectService) {
     this.subjects = SubjectService.getAddSubject();
+    if(this.subjects.length > 0) {
+      this.hidden = false;
+    }
    }
 
    ngOnInit() {
     this.conflicts = [];
+    this.hidden = true;
   }
 
    addToConflicts(subject: Subject) {
