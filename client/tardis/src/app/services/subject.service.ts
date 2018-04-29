@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
-import { ISubject } from '../models/ISubject';
+
 import { CourseType } from '../models/CourseType';
+import { Day } from '../models/Day';
 import { ICourse } from '../models/ICourse';
 import { IProfessor } from '../models/IProfessor';
+import { ISubject } from '../models/ISubject';
 import { ITime } from '../models/ITime';
-import { Day } from '../models/Day';
 import { MarkmyprofessorRatingService } from './markmyprofessor-rating.service';
-import { FacultyService } from './faculty.service';
 
 @Injectable()
 export class SubjectService {
@@ -18,11 +18,9 @@ export class SubjectService {
   parser: DOMParser;
   courses: ICourse[];
   professor: IProfessor;
-  facultyService: FacultyService;
-
 
   semester =  '2017-2018-2';
-    constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {
       this.parser = new DOMParser();
       this.addSubjects = [];
       this.searchSubjects = [];
@@ -62,47 +60,47 @@ export class SubjectService {
         });
       }
 
-      getCourseType(type: String): CourseType {
-        if(type == 'gyakorlat') {
-          return CourseType.Practice;
+      getCourseType(type: string): CourseType {
+        if (type === 'gyakorlat') {
+            return CourseType.Practice;
         } else {
-          return CourseType.Lecture;
+            return CourseType.Lecture;
         }
       }
 
-      getCourses(group: string, time: string, room: string, professor: string): ICourse {
+      getCourses(group: string, time: string, place: string, professor: string): ICourse {
         return ({
           groupId: Number(group),
           time: this.getTime(time),
-          room: room,
+          room: place,
           professor: this.professor = {
             name: professor,
           },
-        })
+        });
       }
 
       getTime(time: string): ITime {
-        let text = time.split(' ');
-        let times = text[1].split('-');
+        const text = time.split(' ');
+        const times = text[1].split('-');
         return ({
           day: this.getDay(text[0]),
           startTime: times[0],
-          endTime: times[1]
-        })
+          endTime: times[1],
+        });
       }
 
       getDay(day: string): Day {
-        switch(day.trim()) {
-          case 'Hétfo':
-          return Day.Monday;
-          case 'Kedd':
-          return Day.Tuesday;
-          case 'Szerda':
-          return Day.Wednesday;
-          case 'Csütörtök':
-          return Day.Thursday;
-          case 'Péntek':
-          return Day.Friday;
+        switch (day.trim()) {
+            case 'Hétfo':
+              return Day.Monday;
+            case 'Kedd':
+              return Day.Tuesday;
+            case 'Szerda':
+              return Day.Wednesday;
+            case 'Csütörtök':
+              return Day.Thursday;
+            case 'Péntek':
+              return Day.Friday;
         }
       }
 

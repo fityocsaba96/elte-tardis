@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectService } from '../../../services/subject.service';
 import { ISubject } from '../../../models/ISubject';
+import { SubjectService } from '../../../services/subject.service';
 
 @Component({
   selector: 'app-added-subject-table',
