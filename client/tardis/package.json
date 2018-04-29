@@ -10,7 +10,9 @@
     "test": "ng test --watch=false --code-coverage --browsers Chrome",
     "test-travis": "ng test --watch=false --browsers ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start-client-server": "concurrently \"ng serve --open --proxy-config proxy.conf.json\" \"php -S 127.0.0.1:8000 -t ../../server/tardis-proxy/src\"",
+    "startup": "npm install && npm run start-client-server"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +38,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~9.6.5",
     "codelyzer": "^4.0.1",
+    "concurrently": "^3.5.1",
     "jasmine-core": "~3.1.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
