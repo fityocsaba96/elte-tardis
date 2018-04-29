@@ -1,0 +1,28 @@
+<table>
+    <thead>
+            <tr>
+                    <td>Kurzusnév</td>
+                    <td>Kurzuskód</td>
+                    <td>Időpont</td>
+                    <td>Óratípus</td>
+                    <td>Oktató</td>
+                    <td>Hozzáad</td>
+                </tr>
+    </thead>
+    <tbody *ngFor="let subject of subjects">
+        <tr>
+            <td>{{ subject.courseName }}</td>
+            <td>{{ subject.courseCode }}</td>
+            <td>{{ subject.time }}</td>
+            <td>{{ subject.courseType }}</td>
+            <td>{{ subject.professor }}</td>
+            <td>
+                <button class="btn btn-primary" (click)="(sendSubjectToAddTable(subject))">Hozzáad</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+

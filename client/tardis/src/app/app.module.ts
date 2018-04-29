@@ -5,9 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import {AppComponent} from './app.component';
+
 import {ContentComponent} from './components/content/content.component';
 import {ExtraConditionsContainerComponent} from './components/extra-conditions-container/extra-conditions-container.component';
 import {HeaderComponent} from './components/header/header.component';
@@ -17,8 +15,10 @@ import {FacultyService} from './services/faculty.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 
 import { AppComponent } from './app.component';
-import { AddingSubjectsComponent } from './components/adding-subjects/adding-subjects.component';
-import { AddingSubjectService } from './services/adding-subject.service';
+import { SubjectService } from './services/subject.service';
+import { SearchSubjectComponent } from './components/subject-container/search-subject/search-subject.component';
+import { SearchedSubjectTable } from './components/subject-container/searched-subject-table/searched-subject-table.component';
+import { AddedSubjectTable } from './components/subject-container/added-subject-table/added-subject-table.component';
 
 
 @NgModule({
@@ -28,17 +28,18 @@ import { AddingSubjectService } from './services/adding-subject.service';
     HeaderComponent,
     ContentComponent,
     ExtraConditionsContainerComponent,
-    AddingSubjectsComponent
+    SearchSubjectComponent,
+    SearchedSubjectTable,
+    AddedSubjectTable
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    FormsModule
+    FormsModule,
     SuiModule,
   ],
-  providers: [AddingSubjectService],
-  providers: [MarkmyprofessorRatingService, FacultyService],
+  providers: [MarkmyprofessorRatingService, FacultyService, SubjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
