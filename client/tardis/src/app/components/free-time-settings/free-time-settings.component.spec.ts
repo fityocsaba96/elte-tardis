@@ -2,6 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 
+import {FreeTimeService} from '../../services/free-time.service';
+import {NotifierService} from '../../services/notifier.service';
 import {AddFreeTimeComponent} from '../add-free-time/add-free-time.component';
 import {FreeTimeTableComponent} from '../free-time-table/free-time-table.component';
 import {FreeTimeSettingsComponent} from './free-time-settings.component';
@@ -18,6 +20,7 @@ describe('FreeTimeSettingsComponent', () => {
         AddFreeTimeComponent,
       ],
       imports: [FormsModule, SuiModule],
+      providers: [FreeTimeService, NotifierService],
     })
     .compileComponents();
   }));

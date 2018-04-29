@@ -11,11 +11,11 @@
   <tbody>
     <tr *ngFor="let freeTime of freeTimes">
       <td>{{ freeTime.name }}</td>
-      <td>{{ freeTime.day }}</td>
-      <td>{{ freeTime.startTime }}</td>
-      <td>{{ freeTime.endTime }}</td>
+      <td>{{ freeTime.time.day }}</td>
+      <td>{{ freeTime.time.startTime }}</td>
+      <td>{{ freeTime.time.endTime }}</td>
       <td>
-        <button class="ui compact icon button" (click)="deleteFreeTime(freeTime)">
+        <button class="ui compact icon button" (click)="delete(freeTime)">
           <i class="trash icon"></i>
         </button>
       </td>

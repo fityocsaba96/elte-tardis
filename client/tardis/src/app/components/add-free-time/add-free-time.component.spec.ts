@@ -2,6 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 
+import {FreeTimeService} from '../../services/free-time.service';
+import {NotifierService} from '../../services/notifier.service';
 import {AddFreeTimeComponent} from './add-free-time.component';
 
 describe('AddFreeTimeComponent', () => {
@@ -12,6 +14,7 @@ describe('AddFreeTimeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AddFreeTimeComponent],
       imports: [FormsModule, SuiModule],
+      providers: [FreeTimeService, NotifierService],
     })
     .compileComponents();
   }));

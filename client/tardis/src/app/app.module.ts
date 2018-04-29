@@ -14,7 +14,10 @@ import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {FacultyService} from './services/faculty.service';
+import {FreeTimeService} from './services/free-time.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
+import {NotifierService} from './services/notifier.service';
+import {OptimalTimetablesService} from './services/optimal-timetables.service';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,11 @@ import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.se
     SuiModule,
   ],
   providers: [
+    NotifierService,
     MarkmyprofessorRatingService,
     FacultyService,
+    FreeTimeService,
+    OptimalTimetablesService,
   ],
   bootstrap: [AppComponent],
 })

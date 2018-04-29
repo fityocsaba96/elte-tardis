@@ -2,6 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {Day} from '../../models/Day';
 import {IFreeTime} from '../../models/IFreeTime';
+import {FreeTimeService} from '../../services/free-time.service';
+import {NotifierService} from '../../services/notifier.service';
 import {FreeTimeTableComponent} from './free-time-table.component';
 
 describe('FreeTimeTableComponent', () => {
@@ -11,6 +13,7 @@ describe('FreeTimeTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FreeTimeTableComponent ],
+      providers: [FreeTimeService, NotifierService],
     })
     .compileComponents();
   }));
@@ -25,11 +28,11 @@ describe('FreeTimeTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('deleteFreeTime', () => {
+  describe('delete', () => {
     it('should delete the added free time', () => {
-      const freeTime: IFreeTime = { name: 'lunch', day: Day.Friday, startTime: '12:00', endTime: '13:00' };
+      const freeTime: IFreeTime = { name: 'lunch', time: { day: Day.Friday, startTime: '12:00', endTime: '13:00' } };
       component.freeTimes.push(freeTime);
-      component.deleteFreeTime(freeTime);
+      component.delete(freeTime);
       expect(component.freeTimes.length).toBe(0);
       // TODO: check in service too
     });

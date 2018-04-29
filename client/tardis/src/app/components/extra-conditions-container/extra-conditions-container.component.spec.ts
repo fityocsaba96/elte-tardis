@@ -4,7 +4,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {FacultyService} from '../../services/faculty.service';
+import {FreeTimeService} from '../../services/free-time.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
+import {NotifierService} from '../../services/notifier.service';
 import {AddFreeTimeComponent} from '../add-free-time/add-free-time.component';
 import {FreeTimeSettingsComponent} from '../free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from '../free-time-table/free-time-table.component';
@@ -25,7 +27,7 @@ describe('ExtraConditionsContainerComponent', () => {
         FreeTimeSettingsComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
-      providers: [MarkmyprofessorRatingService, FacultyService],
+      providers: [MarkmyprofessorRatingService, FacultyService, FreeTimeService, NotifierService],
     })
       .compileComponents();
   }));

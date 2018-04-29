@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FreeTimeService} from '../../services/free-time.service';
 
 @Component({
   selector: 'app-free-time-settings',
@@ -9,12 +10,12 @@ export class FreeTimeSettingsComponent implements OnInit {
 
   isChecked: boolean;
 
-  constructor() { }
+  constructor(private freeTimeService: FreeTimeService) { }
 
   ngOnInit() {
   }
 
   changeChecked() {
-    // call to service
+    this.freeTimeService.toggleApply();
   }
 }
