@@ -1,8 +1,7 @@
 import {Day} from './Day';
+import {ITime} from './ITime';
 
 export interface IFreeTime {
   name: string;
-  day: Day;
-  startTime: string;
-  endTime: string;
+  time: ITime;
 }
