@@ -8,11 +8,11 @@ import {OptimalTimetablesService} from './optimal-timetables.service';
 export class FreeTimeService {
 
   private _freeTimes: IFreeTime[];
-  private apply: boolean;
+  private _apply: boolean;
 
   constructor() {
     this._freeTimes = [];
-    this.apply = false;
+    this._apply = false;
   }
 
   private static dateToTimeString(date: Date): string {
@@ -49,10 +49,14 @@ export class FreeTimeService {
   }
 
   public toggleApply(): void {
-    this.apply = !this.apply;
+    this._apply = !this._apply;
   }
 
   public get freeTimes(): IFreeTime[] {
     return this._freeTimes;
+  }
+
+  public get apply(): boolean {
+    return this._apply;
   }
 }

@@ -11,6 +11,7 @@ import {FreeTimeSettingsComponent} from './free-time-settings.component';
 describe('FreeTimeSettingsComponent', () => {
   let component: FreeTimeSettingsComponent;
   let fixture: ComponentFixture<FreeTimeSettingsComponent>;
+  let service: FreeTimeService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,10 +29,19 @@ describe('FreeTimeSettingsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FreeTimeSettingsComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(FreeTimeService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('changeChecked', () => {
+    it('should toggle the apply state', () => {
+      spyOn(service, 'toggleApply');
+      component.changeChecked();
+      expect(service.toggleApply).toHaveBeenCalled();
+    });
   });
 });

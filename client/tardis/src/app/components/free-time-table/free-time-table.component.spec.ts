@@ -9,6 +9,7 @@ import {FreeTimeTableComponent} from './free-time-table.component';
 describe('FreeTimeTableComponent', () => {
   let component: FreeTimeTableComponent;
   let fixture: ComponentFixture<FreeTimeTableComponent>;
+  let service: FreeTimeService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,6 +22,7 @@ describe('FreeTimeTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FreeTimeTableComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(FreeTimeService);
     fixture.detectChanges();
   });
 
@@ -30,11 +32,12 @@ describe('FreeTimeTableComponent', () => {
 
   describe('delete', () => {
     it('should delete the added free time', () => {
+      spyOn(service, 'delete');
       const freeTime: IFreeTime = { name: 'lunch', time: { day: Day.Friday, startTime: '12:00', endTime: '13:00' } };
       component.freeTimes.push(freeTime);
       component.delete(freeTime);
       expect(component.freeTimes.length).toBe(0);
-      // TODO: check in service too
+      expect(service.delete).toHaveBeenCalled();
     });
   });
 });

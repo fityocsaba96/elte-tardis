@@ -23,17 +23,20 @@ export class AddFreeTimeComponent implements OnInit {
   @ViewChild('addFreeTimeForm')
   private addFreeTimeForm: NgForm;
 
+  @ViewChild('popup')
+  private popup: IPopup;
+
   constructor(private freeTimeService: FreeTimeService,
               private notifierService: NotifierService) { }
 
   ngOnInit() {
   }
 
-  add(popup: IPopup) {
+  add() {
     if (!this.freeTimeService.isValid(this.name, this.day, this.startDate, this.endDate)) {
-      popup.open();
+      this.popup.open();
     } else {
-      popup.close();
+      this.popup.close();
       const freeTime: IFreeTime = this.freeTimeService.add(this.name, this.day, this.startDate, this.endDate);
       this.addFreeTimeForm.resetForm();
       this.notifierService.notifyFreeTimeAdded(freeTime);
