@@ -1,0 +1,24 @@
+<table class="ui single line table">
+  <thead>
+    <tr>
+      <th>Név</th>
+      <th>Nap</th>
+      <th>Kezdet</th>
+      <th>Vég</th>
+      <th>Törlés</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let freeTime of freeTimes">
+      <td>{{ freeTime.name }}</td>
+      <td>{{ freeTime.time.day }}</td>
+      <td>{{ freeTime.time.startTime }}</td>
+      <td>{{ freeTime.time.endTime }}</td>
+      <td>
+        <button class="ui compact icon button" (click)="delete(freeTime)">
+          <i class="trash icon"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

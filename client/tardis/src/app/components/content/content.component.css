@@ -1,0 +1,9 @@
+.content-container {
+  margin: 20px auto;
+  width: 70%;
+  background: cornflowerblue;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px
+}

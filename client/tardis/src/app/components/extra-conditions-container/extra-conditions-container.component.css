@@ -1,0 +1,17 @@
+.extra-conditions-container {
+  margin: 10px;
+  border: 1px solid black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: lightblue;
+}
+
+.extra-conditions-header {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+
+.extra-conditions-content {
+  padding: 5px;
+}
