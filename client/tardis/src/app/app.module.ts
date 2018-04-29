@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SuiModule } from 'ng2-semantic-ui';
 
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+
 import {AppComponent} from './app.component';
 import {AddFreeTimeComponent} from './components/add-free-time/add-free-time.component';
 import {ContentComponent} from './components/content/content.component';
@@ -15,9 +14,7 @@ import {FreeTimeTableComponent} from './components/free-time-table/free-time-tab
 import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
-import {FacultyService} from './services/faculty.service';
 import {FreeTimeService} from './services/free-time.service';
-import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 import {NotifierService} from './services/notifier.service';
 import {OptimalTimetablesService} from './services/optimal-timetables.service';
 import { SearchedSubjectTableComponent } from './components/subject-container/searched-subject-table/searched-subject-table.component';
@@ -54,8 +51,8 @@ import { SubjectService } from './services/subject.service';
     FacultyService,
     FreeTimeService,
     OptimalTimetablesService,
+    SubjectService,
   ],
-  providers: [MarkmyprofessorRatingService, FacultyService, SubjectService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

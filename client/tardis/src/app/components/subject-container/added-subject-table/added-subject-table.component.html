@@ -1,11 +1,9 @@
 <table>
     <tbody *ngFor="let subject of subjects">
         <tr>
-            <td>{{ subject.courseName }}</td>
-            <td>{{ subject.courseCode }}</td>
-            <td>{{ subject.time }}</td>
-            <td>{{ subject.courseType }}</td>
-            <td>{{ subject.professor }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.courseType }}</td>
+                <td>{{ subject.code }}</td>
             <td>
                 <input [ngModel]="checkbox" type="checkbox" value="{{ subject.conflict }}" (ngModelChange)="addToConflicts(subject)">
             </td>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ISubject } from '../../../models/subject';
 import { SubjectService } from '../../../services/subject.service';
+import { ISubject } from '../../../models/ISubject';
 
 @Component({
   selector: 'app-searched-subject-table',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ISubject } from '../../../models/subject';
 import { SubjectService } from '../../../services/subject.service';
+import { ISubject } from '../../../models/ISubject';
 
 @Component({
   selector: 'app-added-subject-table',
@@ -22,12 +22,8 @@ export class AddedSubjectTableComponent implements OnInit {
   }
 
    addToConflicts(subject: ISubject) {
-     if (subject.conflict === true) {
-        this.deleteSubjectFromConflicts(subject);
-     } else {
-      subject.conflict = true;
+      this.deleteSubjectFromConflicts(subject);
       this.conflicts.push(subject);
-     }
    }
 
    deleteSubjectFromAddTable(subject: ISubject) {
