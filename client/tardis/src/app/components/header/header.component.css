@@ -1,0 +1,14 @@
+.header {
+  width: 100%;
+  background: cornflowerblue;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}

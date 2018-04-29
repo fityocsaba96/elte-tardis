@@ -1,0 +1,45 @@
+language: node_js
+
+sudo: false
+
+dist: trusty
+
+cache:
+  directories:
+    - client/tardis/node_modules
+
+node_js:
+  - node
+  - "8.10"
+
+addons:
+  chrome: stable
+
+before_script:
+  - cd client/tardis
+  - npm install
+
+script:
+  - npm run lint
+  - npm run test-travis
+  - npm run build
+
+before_deploy:
+  - cd dist
+  - echo '{}' > composer.json
+  - cp ../../../server/tardis-proxy/src/*.php .
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: l8l2tIfd6yueURa7Hr+dXhqvdYgnOfKLP69iC9DUUdS6vGRsdT6H6tFzjxY2dFutxkPQPjMcz1mnCrDHPaMIe84GlJW4UKqeFQB2YFSSCYVZsL5b/e3O8xd+SBNTp+na5HMxnoNXPR/UhxOZKMFBAEwwn+7xMN+I1K3c8XQV4nSaKbBgXY08PTK718brCx7Fqw4bEMkpi/S0+edg3I2eJck18tVqoFac5IWXTffkw7y2Y1FTA5XmTsqX6S1Q0EhBqds5bCfx6Qy+Sy8Oq81zPHPm/OsU0WpNl+gtMkVeOL6Q06OE+/wemmx2JuHQcLk2wxE59PWxBX/JmbjjhNWVSRnNbhG8lNeLnnH7d2Z1/GVOBy37+7iPoPUzBScUHtbLeho/S2BoT5e8Lr8L52enL6z64QUAUQ5pQuEz+o14pz35fpgWO0FFR3S8snQ434oE+vTfGZ/BG7SenvFL14kUggEJ4bnZdRGJLseDOeKZ3Us2s2+KNdPndUpAfcPCfDz2dDtT0g2ecZTciCNoQRlpgIIgIHuNXiITjGZVxEbJH1eI+YeDxqQwH570JHFznWzERrNrI2Sxi5yYTPo9ZtaQQBzvsMA3Ilu4IXq2KVlH9PBVOYQV9DBpbJJh16sJ3cXDBFtn3lW/zNjee2nHe9PCRhnVAJfwgE5fJmxy6WLvdBg=
+  app: elte-tardis
+  skip_cleanup: true
+  on:
+    branch: master
+    node: "8.10"
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
