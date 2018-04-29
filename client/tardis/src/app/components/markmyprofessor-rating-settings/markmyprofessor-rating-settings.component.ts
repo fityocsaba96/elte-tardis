@@ -9,22 +9,23 @@ import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-ratin
 })
 export class MarkmyprofessorRatingSettingsComponent implements OnInit {
 
-  public isApplied: boolean;
-  public minimumRating: number;
+  isApplied: boolean;
+  minimumRating: number;
 
-  constructor(private markMyProfessorService: MarkmyprofessorRatingService,
-              private facultyService: FacultyService) {
+  constructor(private markMyProfessorService: MarkmyprofessorRatingService) {
   }
 
   ngOnInit() {
   }
 
-  onCheckboxChange() {
-    console.log(this.isApplied);
+  setApplied() {
+    this.markMyProfessorService.setMinimumRating(this.minimumRating && this.isApplied ? this.minimumRating : 0);
   }
 
-  onRatingChange() {
-    console.log(this.minimumRating);
+  updateRating() {
+    if (this.isApplied) {
+      this.markMyProfessorService.setMinimumRating(this.minimumRating);
+    }
   }
 
 }

@@ -1,19 +1,24 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {IProfessor} from '../models/IProfessor';
 import {FacultyService} from './faculty.service';
 
 @Injectable()
 export class MarkmyprofessorRatingService {
 
-  private originalName: string;
   private professors: IProfessor[];
+  private minimumRating: number;
+  private originalName: string;
   private hasNextPage: boolean;
   private nextPage: number;
+  private parser: DOMParser;
 
   constructor(private http: HttpClient,
               private facultyService: FacultyService) {
     this.professors = [];
+    this.parser = new DOMParser();
+    this.minimumRating = 0;
   }
 
   static stripName(rawName) {
@@ -36,14 +41,17 @@ export class MarkmyprofessorRatingService {
     return name;
   }
 
-  getData(searchName: string, page: string) {
-    return this.http.get('/mark-my-professor.php/',
-      {
-        responseType: 'text',
-        params: new HttpParams()
-          .append('name', searchName)
-          .append('page', page),
-      });
+  setMinimumRating(rating: number) {
+    this.minimumRating = rating;
+  }
+
+  filterProfessors(): IProfessor[] {
+    const faculty = this.facultyService.getSelectedFaculty();
+    return this.professors.filter((p) => p.faculty === faculty && p.rating >= this.minimumRating);
+  }
+
+  exists(professorName: string): boolean {
+    return this.professors.findIndex((p) => p.name.includes(professorName)) > -1;
   }
 
   getRatingFor(professorName: string) {
@@ -57,7 +65,7 @@ export class MarkmyprofessorRatingService {
     this.sendRequest(searchName, this.facultyService.getSelectedFaculty());
   }
 
-  sendRequest(professorName: string, faculty: string) {
+  private sendRequest(professorName: string, faculty: string) {
     ++this.nextPage;
     this.getData(professorName, String(this.nextPage))
       .subscribe((page) => {
@@ -70,11 +78,20 @@ export class MarkmyprofessorRatingService {
       });
   }
 
-  parseHtml(html: string, faculty: string) {
-    const parser = new DOMParser();
-    const document = parser.parseFromString(html, 'text/html');
+  private getData(searchName: string, page: string): Observable<string> {
+    return this.http.get('/mark-my-professor.php/',
+      {
+        responseType: 'text',
+        params: new HttpParams()
+          .append('name', searchName)
+          .append('page', page),
+      });
+  }
+
+  private parseHtml(html: string, faculty: string) {
+    const document = this.parser.parseFromString(html, 'text/html');
     const table = document.querySelector('tbody');
-    if (table == null) {
+    if (!table) {
       return;
     }
     const rows = Array.from(table.querySelectorAll('tr'));
@@ -82,10 +99,10 @@ export class MarkmyprofessorRatingService {
       const school = row.cells[5].innerText.trim();
       const rating = Number(row.cells[4].innerText.trim());
       if (school === faculty && Number.isFinite(rating) && rating > 0.0) {
-        this.addProfessor({
+        this.professors.push({
           name: this.originalName,
           rating,
-          school,
+          faculty,
         });
         this.hasNextPage = false;
         return;
@@ -99,24 +116,6 @@ export class MarkmyprofessorRatingService {
     } else {
       this.hasNextPage = false;
     }
-  }
-
-  addProfessor(professor: IProfessor) {
-    this.professors.push(professor);
-  }
-
-  findProfessorAboveRating(professorName: string, rating: number): IProfessor {
-    const faculty = this.facultyService.getSelectedFaculty();
-    return this.professors.find((p) => p.school.includes(faculty) && p.name === professorName && p.rating >= rating);
-  }
-
-  filterProfessors(rating?: number): IProfessor[] {
-    const faculty = this.facultyService.getSelectedFaculty();
-    return this.professors.filter((p) => p.school.includes(faculty) && p.rating >= rating);
-  }
-
-  exists(professorName: string): boolean {
-    return this.professors.findIndex((p) => p.name.includes(professorName)) > -1;
   }
 
 }
