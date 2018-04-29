@@ -1,48 +1,46 @@
-import { Component, OnInit } from "@angular/core";
-import { SubjectService } from "../../../services/subject.service";
-import { Subject } from "../../../models/subject";
+import { Component, OnInit } from '@angular/core';
+import { ISubject } from '../../../models/subject';
+import { SubjectService } from '../../../services/subject.service';
 
 @Component({
-  selector: 'added-subject-table',
+  selector: 'app-added-subject-table',
   templateUrl: './added-subject-table.component.html',
-  styleUrls: ['./added-subject-table.component.css']
+  styleUrls: ['./added-subject-table.component.css'],
 })
 
-export class AddedSubjectTable implements OnInit{
-  
-  subjects: Subject[];
-  conflicts: Subject[];
+export class AddedSubjectTableComponent implements OnInit {
+  subjects: ISubject[];
+  conflicts: ISubject[];
   hidden: boolean;
 
-  constructor(private SubjectService: SubjectService) {
-    this.subjects = SubjectService.getAddSubject();
-    if(this.subjects.length > 0) {
-      this.hidden = false;
-    }
+  constructor(private subjectService: SubjectService) {
+    this.subjects = subjectService.getAddSubject();
    }
 
    ngOnInit() {
     this.conflicts = [];
-    this.hidden = true;
   }
 
-   addToConflicts(subject: Subject) {
-     this.conflicts.push(subject);
-     console.log(this.conflicts);
-   }
-
-   deleteSubjectFromAddTable(subject: Subject) {
-     let index = this.subjects.indexOf(subject);
-     if(index !== -1) {
-       this.subjects.splice(index,1);
+   addToConflicts(subject: ISubject) {
+     if (subject.conflict === true) {
+        this.deleteSubjectFromConflicts(subject);
+     } else {
+      subject.conflict = true;
+      this.conflicts.push(subject);
      }
    }
 
-  
+   deleteSubjectFromAddTable(subject: ISubject) {
+     const index = this.subjects.indexOf(subject);
+     if (index !== -1) {
+        this.subjects.splice(index, 1);
+      }
+   }
 
-  
+   deleteSubjectFromConflicts(subject: ISubject) {
+    const index = this.conflicts.indexOf(subject);
+    if (index !== -1) {
+        this.conflicts.splice(index, 1);
+      }
+  }
 }
-
-
-
-

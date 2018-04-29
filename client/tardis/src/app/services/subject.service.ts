@@ -1,68 +1,63 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Http, RequestOptions, Headers } from "@angular/http";
-import { Subject } from "../models/subject";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { ISubject } from '../models/subject';
 
 @Injectable()
 export class SubjectService {
 
-  searchSubjects: Subject[];
-  addSubjects: Subject[];
+  searchSubjects: ISubject[];
+  addSubjects: ISubject[];
   parser: DOMParser;
-
+  semester =  '2017-2018-2';
     constructor(private http: HttpClient) {
       this.parser = new DOMParser();
-      this.searchSubjects = [];
       this.addSubjects = [];
+      this.searchSubjects = [];
     }
 
-    semester =  '2017-2018-2';
-    public getData(search: string) {
+    getData(search: string) {
         return this.http.get('/ttk-to.php',
         {
           responseType: 'text',
           params: new HttpParams()
-          .append('semester',this.semester)
-          .append('subject',search)
+          .append('semester', this.semester)
+          .append('subject', search),
         });
       }
 
       parseHtml(html: string) {
-        const document = this.parser.parseFromString(html,'text/html');
+        const document = this.parser.parseFromString(html, 'text/html');
         const table = document.querySelector('tbody');
         if (table == null) {
           return;
         }
         const rows = Array.from(table.querySelectorAll('tr'));
         rows.forEach((row) => {
-          if(row.cells[0].innerText.trim() !== "Kurzusnev" && row.cells[2].innerText.trim() !== "") {
+          if (row.cells[0].innerText.trim() !== 'Kurzusnev' && row.cells[2].innerText.trim() !== '') {
             this.searchSubjects.push({
               courseName: row.cells[0].innerText.trim(),
               courseCode: row.cells[1].innerText.trim(),
               time: row.cells[2].innerText.trim(),
               courseType: row.cells[6].innerText.trim(),
               professor: row.cells[11].innerText.trim(),
-              conflict: true
+              conflict: false,
             });
-          } 
+          }
         });
       }
 
-     getSearchSubject(): Subject[] {
+     getSearchSubject(): ISubject[] {
        return this.searchSubjects;
      }
 
-      addSubject(subject: Subject) {
-        if(this.addSubjects.indexOf(subject) === -1) {
+      addSubject(subject: ISubject) {
+        if (this.addSubjects.indexOf(subject) === -1) {
           this.addSubjects.push(subject);
         }
       }
 
-      getAddSubject(): Subject[] {
+      getAddSubject(): ISubject[] {
         return this.addSubjects;
       }
-
-
-      
 }

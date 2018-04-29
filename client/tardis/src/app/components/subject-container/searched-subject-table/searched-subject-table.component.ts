@@ -1,36 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { SubjectService } from "../../../services/subject.service";
-import { Subject } from "../../../models/subject";
+import { Component, OnInit } from '@angular/core';
+import { ISubject } from '../../../models/subject';
+import { SubjectService } from '../../../services/subject.service';
 
 @Component({
-  selector: 'searched-subject-table',
+  selector: 'app-searched-subject-table',
   templateUrl: './searched-subject-table.component.html',
-  styleUrls: ['./searched-subject-table.component.css']
+  styleUrls: ['./searched-subject-table.component.css'],
 })
 
-export class SearchedSubjectTable implements OnInit{
-  
-  subjects: Subject[];
+export class SearchedSubjectTableComponent implements OnInit {
+  subjects: ISubject[];
   hidden: boolean;
 
   constructor(private searchSubjectService: SubjectService) {
     this.subjects = searchSubjectService.getSearchSubject();
-    if(this.subjects.length > 0) {
-      this.hidden = false;
-    }
    }
 
   ngOnInit() {
-    this.hidden = true;
   }
 
-  sendSubjectToAddTable(subject: Subject) {
+  sendSubjectToAddTable(subject: ISubject) {
     this.searchSubjectService.addSubject(subject);
   }
-
-  
 }
-
-
-
-

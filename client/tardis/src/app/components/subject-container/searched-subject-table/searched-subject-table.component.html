@@ -1,14 +1,4 @@
 <table>
-    <thead>
-            <tr [hidden]="(hidden)">
-                    <td>Kurzusnév</td>
-                    <td>Kurzuskód</td>
-                    <td>Időpont</td>
-                    <td>Óratípus</td>
-                    <td>Oktató</td>
-                    <td>Hozzáad</td>
-                </tr>
-    </thead>
     <tbody *ngFor="let subject of subjects">
         <tr>
             <td>{{ subject.courseName }}</td>

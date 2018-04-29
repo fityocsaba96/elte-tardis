@@ -1,30 +1,27 @@
-import { Component, OnInit } from "@angular/core";
-import { SubjectService } from "../../../services/subject.service";
-import { Subject } from "../../../models/subject";
+import { Component, OnInit } from '@angular/core';
+import { SubjectService } from '../../../services/subject.service';
 
 @Component({
-  selector: 'search-subject',
+  selector: 'app-search-subject',
   templateUrl: './search-subject.component.html',
-  styleUrls: ['./search-subject.component.css']
+  styleUrls: ['./search-subject.component.css'],
 })
 
-export class SearchSubjectComponent implements OnInit{
+export class SearchSubjectComponent implements OnInit {
 
-  constructor(private SubjectService: SubjectService) { }
+  search: string;
+  constructor(private subjectService: SubjectService) { }
 
   ngOnInit() {
+    this.search = '';
   }
 
   getSubject(subjectName: string) {
-    this.SubjectService.getData(subjectName)
+    this.subjectService.getData(subjectName)
     .subscribe( (res) => {
-      this.SubjectService.parseHtml(res);
+      this.subjectService.parseHtml(res);
     }, (err) => {
       console.log(err);
     });
   }
 }
-
-
-
-
