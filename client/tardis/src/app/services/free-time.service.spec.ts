@@ -32,9 +32,10 @@ describe('FreeTimeService', () => {
 
   describe('add', () => {
     it('should parse and add free time', () => {
-      service.add('sad', Day.Friday, new Date(1524999176000), new Date(1525001176000));
+      const offset: number = (new Date()).getTimezoneOffset() * 60000;
+      service.add('sad', Day.Friday, new Date(1524999176000 + offset), new Date(1525001176000 + offset));
       expect(service.freeTimes.length).toBe(1);
-      expect(service.freeTimes[0].time.startTime).toBe('12:52');
+      expect(service.freeTimes[0].time.startTime).toBe('10:52');
     });
   });
 
