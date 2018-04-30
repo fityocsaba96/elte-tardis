@@ -3,6 +3,7 @@ import {async, inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {FacultyService} from './faculty.service';
 import {MarkmyprofessorRatingService} from './markmyprofessor-rating.service';
+import {NotifierService} from './notifier.service';
 
 describe('MarkmyprofessorRatingService', () => {
 
@@ -18,6 +19,7 @@ describe('MarkmyprofessorRatingService', () => {
       providers: [
         MarkmyprofessorRatingService,
         FacultyService,
+        NotifierService,
       ],
     });
     mmpService = TestBed.get(MarkmyprofessorRatingService);

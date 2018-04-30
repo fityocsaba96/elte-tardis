@@ -18,6 +18,8 @@ import {FreeTimeService} from './services/free-time.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 import {NotifierService} from './services/notifier.service';
 import {OptimalTimetablesService} from './services/optimal-timetables.service';
+import {SubjectService} from './services/subject.service';
+import {TimeService} from './services/time.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import {OptimalTimetablesService} from './services/optimal-timetables.service';
     FacultyService,
     FreeTimeService,
     OptimalTimetablesService,
+    SubjectService,
+    TimeService,
   ],
   bootstrap: [AppComponent],
 })

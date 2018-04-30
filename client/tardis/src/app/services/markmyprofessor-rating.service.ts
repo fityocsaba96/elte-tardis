@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {IProfessor} from '../models/IProfessor';
 import {FacultyService} from './faculty.service';
+import {NotifierService} from './notifier.service';
 
 @Injectable()
 export class MarkmyprofessorRatingService {
@@ -13,12 +14,15 @@ export class MarkmyprofessorRatingService {
   private hasNextPage: boolean;
   private nextPage: number;
   private parser: DOMParser;
+  private _apply: boolean;
 
   constructor(private http: HttpClient,
-              private facultyService: FacultyService) {
+              private facultyService: FacultyService,
+              private notifierService: NotifierService) {
     this.professors = [];
     this.parser = new DOMParser();
     this.minimumRating = 0;
+    this._apply = false;
   }
 
   static stripName(rawName) {
@@ -41,6 +45,14 @@ export class MarkmyprofessorRatingService {
     return name;
   }
 
+  public toggleApply(): void {
+    this._apply = !this._apply;
+  }
+
+  public get apply(): boolean {
+    return this._apply;
+  }
+
   setMinimumRating(rating: number) {
     this.minimumRating = rating;
   }
@@ -56,6 +68,11 @@ export class MarkmyprofessorRatingService {
 
   getRatingFor(professorName: string) {
     if (this.exists(professorName)) {
+      if (this.filterProfessors().some((professor) => professor.name === professorName)) {
+        this.notifierService.notifyMarkmyprofessorRatingFound(true);
+      } else {
+        this.notifierService.notifyMarkmyprofessorRatingFound(false);
+      }
       return;
     }
     this.originalName = professorName;
@@ -63,6 +80,11 @@ export class MarkmyprofessorRatingService {
     this.hasNextPage = true;
     this.nextPage = 0;
     this.sendRequest(searchName, this.facultyService.getSelectedFaculty());
+  }
+
+  public async meetsCondition(professorName: string): Promise<boolean> {
+    this.getRatingFor(professorName);
+    return await this.notifierService.markmyprofessorRatingFound.asObservable().toPromise().then((meetsCondition) => meetsCondition);
   }
 
   private sendRequest(professorName: string, faculty: string) {
@@ -105,6 +127,11 @@ export class MarkmyprofessorRatingService {
           faculty,
         });
         this.hasNextPage = false;
+        if (rating >= this.minimumRating) {
+          this.notifierService.notifyMarkmyprofessorRatingFound(true);
+        } else {
+          this.notifierService.notifyMarkmyprofessorRatingFound(false);
+        }
         return;
       }
     });
@@ -115,6 +142,9 @@ export class MarkmyprofessorRatingService {
       this.hasNextPage = isNaN(pageNumber);
     } else {
       this.hasNextPage = false;
+    }
+    if (!this.hasNextPage) {
+      this.notifierService.notifyMarkmyprofessorRatingFound(false);
     }
   }
 
