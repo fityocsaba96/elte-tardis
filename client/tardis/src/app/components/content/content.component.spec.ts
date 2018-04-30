@@ -14,6 +14,11 @@ import {FreeTimeTableComponent} from '../free-time-table/free-time-table.compone
 import {MarkmyprofessorRatingSettingsComponent} from '../markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {ContentComponent} from './content.component';
 
+import { SubjectService } from '../../services/subject.service';
+import { AddedSubjectTableComponent } from '../subject-container/added-subject-table/added-subject-table.component';
+import { SearchSubjectComponent } from '../subject-container/search-subject/search-subject.component';
+import { SearchedSubjectTableComponent } from '../subject-container/searched-subject-table/searched-subject-table.component';
+
 describe('ContentComponent', () => {
   let component: ContentComponent;
   let fixture: ComponentFixture<ContentComponent>;
@@ -26,9 +31,12 @@ describe('ContentComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        AddedSubjectTableComponent,
+        SearchSubjectComponent,
+        SearchedSubjectTableComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
-      providers: [MarkmyprofessorRatingService, FacultyService, FreeTimeService, NotifierService],
+      providers: [MarkmyprofessorRatingService, FacultyService, FreeTimeService, NotifierService, SubjectService],
     })
       .compileComponents();
   }));
