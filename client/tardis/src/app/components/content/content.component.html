@@ -1,3 +1,14 @@
 <div class="content-container">
+  <div class="ui segment"> <!--test data-->
+    <strong>Tárgyak</strong>
+    <p><strong style="color: red">TEST</strong></p>
+    <pre>{{ subjects }}</pre>
+  </div>
   <app-extra-conditions-container></app-extra-conditions-container>
+  <button class="ui button" (click)="generateTimetables()">Összes optimális órarend előállítása</button>
+  <div class="ui segment"> <!--test data-->
+    <strong>Optimális órarendek</strong>
+    <p><strong style="color: red">TEST</strong></p>
+    <pre>{{ timetables }}</pre>
+  </div>
 </div>

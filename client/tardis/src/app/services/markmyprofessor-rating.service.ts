@@ -84,8 +84,9 @@ export class MarkmyprofessorRatingService {
   }
 
   public meetsCondition(professorName: string): Promise<boolean> {
+    const promise = this.notifierService.markmyprofessorRatingFound.take(1).toPromise();
     this.getRatingFor(professorName);
-    return this.notifierService.markmyprofessorRatingFound.take(1).toPromise();
+    return promise;
   }
 
   private sendRequest(professorName: string, faculty: string) {

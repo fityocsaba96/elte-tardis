@@ -7,6 +7,8 @@ import {FacultyService} from '../../services/faculty.service';
 import {FreeTimeService} from '../../services/free-time.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
 import {NotifierService} from '../../services/notifier.service';
+import {OptimalTimetablesService} from '../../services/optimal-timetables.service';
+import {SubjectService} from '../../services/subject.service';
 import {AddFreeTimeComponent} from '../add-free-time/add-free-time.component';
 import {ExtraConditionsContainerComponent} from '../extra-conditions-container/extra-conditions-container.component';
 import {FreeTimeSettingsComponent} from '../free-time-settings/free-time-settings.component';
@@ -28,7 +30,14 @@ describe('ContentComponent', () => {
         FreeTimeSettingsComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
-      providers: [MarkmyprofessorRatingService, FacultyService, FreeTimeService, NotifierService],
+      providers: [
+        MarkmyprofessorRatingService,
+        FacultyService,
+        FreeTimeService,
+        NotifierService,
+        SubjectService,
+        OptimalTimetablesService,
+      ],
     })
       .compileComponents();
   }));
