@@ -59,10 +59,45 @@ describe('MarkmyprofessorRatingService', () => {
   describe('getRatingFor', () => {
     it('should update professors', async(inject([HttpTestingController], (httpMock) => {
       mmpService.getRatingFor(professorName);
+      // tslint:disable-next-line:no-duplicate-string
       httpMock.expectOne((req) => req.method === 'GET' && req.url.includes('mark-my-professor.php'))
+        // tslint:disable-next-line:no-duplicate-string
         .flush(exampleResponse, {headers: {'Content-Type': 'text/html'}});
       expect(mmpService.exists(professorName)).toBeTruthy();
     })));
   });
 
+  describe('toggleApply', () => {
+    it('should toggle apply state', () => {
+      expect(mmpService.apply).toBeFalsy();
+      mmpService.toggleApply();
+      expect(mmpService.apply).toBeTruthy();
+    });
+  });
+
+  describe('meetsCondition', () => {
+    it('should return true when given a professor name whose rating is >= than the set rating', (done) => {
+      inject([HttpTestingController], (httpMock) => {
+        mmpService.setMinimumRating(2.5);
+        mmpService.meetsCondition(professorName).then((value) => {
+          expect(value).toBeTruthy();
+          done();
+        });
+        httpMock.expectOne((req) => req.method === 'GET' && req.url.includes('mark-my-professor.php'))
+          .flush(exampleResponse, {headers: {'Content-Type': 'text/html'}});
+      })();
+    });
+
+    it('should return false when given a professor name whose rating is < than the set rating', (done) => {
+      inject([HttpTestingController], (httpMock) => {
+        mmpService.setMinimumRating(4.0);
+        mmpService.meetsCondition(professorName).then((value) => {
+          expect(value).toBeFalsy();
+          done();
+        });
+        httpMock.expectOne((req) => req.method === 'GET' && req.url.includes('mark-my-professor.php'))
+          .flush(exampleResponse, {headers: {'Content-Type': 'text/html'}});
+      })();
+    });
+  });
 });

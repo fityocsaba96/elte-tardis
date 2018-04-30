@@ -1,5 +1,6 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import 'rxjs/add/operator/take';
 import {Observable} from 'rxjs/Observable';
 import {IProfessor} from '../models/IProfessor';
 import {FacultyService} from './faculty.service';
@@ -82,9 +83,9 @@ export class MarkmyprofessorRatingService {
     this.sendRequest(searchName, this.facultyService.getSelectedFaculty());
   }
 
-  public async meetsCondition(professorName: string): Promise<boolean> {
+  public meetsCondition(professorName: string): Promise<boolean> {
     this.getRatingFor(professorName);
-    return await this.notifierService.markmyprofessorRatingFound.asObservable().toPromise().then((meetsCondition) => meetsCondition);
+    return this.notifierService.markmyprofessorRatingFound.take(1).toPromise();
   }
 
   private sendRequest(professorName: string, faculty: string) {
