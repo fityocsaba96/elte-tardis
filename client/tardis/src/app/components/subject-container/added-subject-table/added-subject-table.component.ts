@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ISubject } from '../../../models/ISubject';
+import { ISubjects } from '../../../models/ISubjects';
 import { SubjectService } from '../../../services/subject.service';
 
 @Component({
@@ -9,34 +10,48 @@ import { SubjectService } from '../../../services/subject.service';
 })
 
 export class AddedSubjectTableComponent implements OnInit {
-  subjects: ISubject[];
-  conflicts: ISubject[];
-  hidden: boolean;
+  notConflicted: ISubject[];
+  conflicted: ISubject[];
+  subjects: ISubjects;
 
   constructor(private subjectService: SubjectService) {
-    this.subjects = subjectService.getAddSubject();
+    this.notConflicted = subjectService.getAddSubject();
+    this.subjects = this.mergeSubjects();
    }
 
    ngOnInit() {
-    this.conflicts = [];
+    this.conflicted = [];
   }
 
    addToConflicts(subject: ISubject) {
-      this.deleteSubjectFromConflicts(subject);
-      this.conflicts.push(subject);
+      this.deleteSubjectFromAddTable(subject);
+      this.conflicted.push(subject);
+      this.subjects = this.mergeSubjects();
    }
+
+   addToNotConflicts(subject: ISubject) {
+    this.deleteSubjectFromArray(subject, this.conflicted);
+    this.notConflicted.push(subject);
+    this.subjects = this.mergeSubjects();
+ }
 
    deleteSubjectFromAddTable(subject: ISubject) {
-     const index = this.subjects.indexOf(subject);
-     if (index !== -1) {
-        this.subjects.splice(index, 1);
-      }
+      this.deleteSubjectFromArray(subject, this.notConflicted);
+      this.deleteSubjectFromArray(subject, this.conflicted);
+      this.subjects = this.mergeSubjects();
    }
 
-   deleteSubjectFromConflicts(subject: ISubject) {
-    const index = this.conflicts.indexOf(subject);
+   deleteSubjectFromArray(subject: ISubject, array: ISubject[]) {
+    const index = array.indexOf(subject);
     if (index !== -1) {
-        this.conflicts.splice(index, 1);
+        array.splice(index, 1);
       }
+  }
+
+  mergeSubjects(): ISubjects {
+    return ({
+      notConflicted: this.notConflicted,
+      conflicted: this.conflicted,
+    });
   }
 }
