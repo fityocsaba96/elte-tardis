@@ -12,8 +12,12 @@ import {FreeTimeTableComponent} from './components/free-time-table/free-time-tab
 import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
+import { AddedSubjectTableComponent } from './components/subject-container/added-subject-table/added-subject-table.component';
+import { SearchSubjectComponent } from './components/subject-container/search-subject/search-subject.component';
+import { SearchedSubjectTableComponent } from './components/subject-container/searched-subject-table/searched-subject-table.component';
 import {FacultyService} from './services/faculty.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
+import { SubjectService } from './services/subject.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -27,6 +31,9 @@ describe('AppComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        SearchedSubjectTableComponent,
+        SearchSubjectComponent,
+        AddedSubjectTableComponent,
       ],
       imports: [
         BrowserModule,
@@ -34,7 +41,7 @@ describe('AppComponent', () => {
         FormsModule,
         SuiModule,
       ],
-      providers: [MarkmyprofessorRatingService, FacultyService],
+      providers: [MarkmyprofessorRatingService, FacultyService, SubjectService],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
