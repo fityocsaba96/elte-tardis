@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ISubjects} from '../../models/ISubjects';
+import {OptimalTimetablesService} from '../../services/optimal-timetables.service';
+import {SubjectService} from '../../services/subject.service';
 
 @Component({
   selector: 'app-content',
@@ -7,10 +10,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() {
+  subjects: string;
+  timetables: string;
+
+  constructor(private subjectService: SubjectService,
+              private optimalTimetablesService: OptimalTimetablesService) {
   }
 
   ngOnInit() {
+    this.subjects = JSON.stringify(this.subjectService.subjects, null, 4); // test data
   }
 
+  async generateTimetables() { // test
+    const timetables = await this.optimalTimetablesService.generateOptimalTimetables();
+    this.timetables = JSON.stringify(timetables, null, 4);
+  }
 }

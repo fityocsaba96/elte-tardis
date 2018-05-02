@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {FacultyService} from '../../services/faculty.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
+import {NotifierService} from '../../services/notifier.service';
 import {MarkmyprofessorRatingSettingsComponent} from './markmyprofessor-rating-settings.component';
 
 describe('MarkmyprofessorRatingSettingsComponent', () => {
@@ -16,7 +17,7 @@ describe('MarkmyprofessorRatingSettingsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MarkmyprofessorRatingSettingsComponent],
       imports: [HttpClientModule, FormsModule, SuiModule],
-      providers: [MarkmyprofessorRatingService, FacultyService],
+      providers: [MarkmyprofessorRatingService, FacultyService, NotifierService],
     })
       .compileComponents();
   }));
@@ -32,18 +33,11 @@ describe('MarkmyprofessorRatingSettingsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('setApplied', () => {
-    it('should set the minimum rating in the service', () => {
-      spyOn(service, 'setMinimumRating');
+  describe('changeChecked', () => {
+    it('should toggle the apply state', () => {
+      spyOn(service, 'toggleApply');
       component.setApplied();
-      expect(service.setMinimumRating).toHaveBeenCalledWith(0);
-    });
-    it('should set the minimum rating in the service with applied and rating', () => {
-      spyOn(service, 'setMinimumRating');
-      component.isApplied = true;
-      component.minimumRating = 4;
-      component.setApplied();
-      expect(service.setMinimumRating).toHaveBeenCalledWith(4);
+      expect(service.toggleApply).toHaveBeenCalled();
     });
   });
 
