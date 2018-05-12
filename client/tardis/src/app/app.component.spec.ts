@@ -15,6 +15,7 @@ import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofess
 import { AddedSubjectTableComponent } from './components/subject-container/added-subject-table/added-subject-table.component';
 import { SearchSubjectComponent } from './components/subject-container/search-subject/search-subject.component';
 import { SearchedSubjectTableComponent } from './components/subject-container/searched-subject-table/searched-subject-table.component';
+import { SubjectContainerComponent } from './components/subject-container/subject-container.component';
 import {FacultyService} from './services/faculty.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 import { SubjectService } from './services/subject.service';
@@ -34,6 +35,7 @@ describe('AppComponent', () => {
         SearchedSubjectTableComponent,
         SearchSubjectComponent,
         AddedSubjectTableComponent,
+        SubjectContainerComponent,
       ],
       imports: [
         BrowserModule,

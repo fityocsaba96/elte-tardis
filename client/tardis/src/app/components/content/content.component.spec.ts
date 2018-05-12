@@ -18,6 +18,7 @@ import { SubjectService } from '../../services/subject.service';
 import { AddedSubjectTableComponent } from '../subject-container/added-subject-table/added-subject-table.component';
 import { SearchSubjectComponent } from '../subject-container/search-subject/search-subject.component';
 import { SearchedSubjectTableComponent } from '../subject-container/searched-subject-table/searched-subject-table.component';
+import { SubjectContainerComponent } from '../subject-container/subject-container.component';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -34,6 +35,7 @@ describe('ContentComponent', () => {
         AddedSubjectTableComponent,
         SearchSubjectComponent,
         SearchedSubjectTableComponent,
+        SubjectContainerComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
       providers: [MarkmyprofessorRatingService, FacultyService, FreeTimeService, NotifierService, SubjectService],

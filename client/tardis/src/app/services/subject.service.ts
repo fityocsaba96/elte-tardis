@@ -18,103 +18,118 @@ export class SubjectService {
   parser: DOMParser;
   courses: ICourse[];
   professor: IProfessor;
-
-  semester =  '2017-2018-2';
+  semester: string;
   constructor(private http: HttpClient) {
-      this.parser = new DOMParser();
-      this.addSubjects = [];
-      this.searchSubjects = [];
-      this.courses = [];
-    }
+    this.parser = new DOMParser();
+    this.addSubjects = [];
+    this.searchSubjects = [];
+    this.courses = [];
+    this.setSemester();
+  }
 
-    getData(search: string) {
-        return this.http.get('/ttk-to.php',
-        {
-          responseType: 'text',
-          params: new HttpParams()
+  setSemester() {
+    const date = new Date();
+    if (date.getMonth() > 4) {
+      this.semester = (date.getFullYear() + '-' + (date.getFullYear() + 1) + '-' + '1');
+    } else {
+      this.semester = ((date.getFullYear() - 1) + '-' + date.getFullYear() + '-' + '2');
+    }
+  }
+
+  getData(search: string) {
+    return this.http.get('/ttk-to.php',
+      {
+        responseType: 'text',
+        params: new HttpParams()
           .append('semester', this.semester)
           .append('subject', search),
-        });
-      }
+      });
+  }
 
-      parseHtml(html: string) {
-        const document = this.parser.parseFromString(html, 'text/html');
-        const table = document.querySelector('tbody');
-        if (table == null) {
-          return;
+  parseHtml(html: string) {
+    const document = this.parser.parseFromString(html, 'text/html');
+    const table = document.querySelector('tbody');
+    if (table == null) {
+      return;
+    }
+    const rows = Array.from(table.querySelectorAll('tr'));
+    try {
+      rows.forEach((row) => {
+        if (row.cells[0].innerText.trim() !== 'Kurzusnev' && row.cells[2].innerText.trim() !== '') {
+          this.courses.push(this.getCourses(row.cells[7].innerText.trim(),
+            row.cells[2].innerText.trim(),
+            row.cells[3].innerText.trim(),
+            row.cells[11].innerText.trim()));
+          this.searchSubjects.push({
+            name: row.cells[0].innerText.trim(),
+            courseType: this.getCourseType(row.cells[6].innerText.trim()),
+            code: row.cells[1].innerText.trim(),
+            courses: this.courses,
+          });
         }
-        const rows = Array.from(table.querySelectorAll('tr'));
-        rows.forEach((row) => {
-          if (row.cells[0].innerText.trim() !== 'Kurzusnev' && row.cells[2].innerText.trim() !== '') {
-            this.courses.push(this.getCourses(row.cells[7].innerText.trim(),
-                                              row.cells[2].innerText.trim(),
-                                              row.cells[3].innerText.trim(),
-                                              row.cells[11].innerText.trim()));
-            this.searchSubjects.push({
-              name: row.cells[0].innerText.trim(),
-              courseType: this.getCourseType(row.cells[6].innerText.trim()),
-              code: row.cells[1].innerText.trim(),
-              courses: this.courses,
-            });
-          }
-        });
-      }
+      });
+    } catch (Exception) {
+      this.searchSubjects = [];
+      this.courses = [];
+      this.addSubjects = [];
+      throw new Error();
+    }
+  }
+  getCourseType(type: string): CourseType {
+    if (type === 'gyakorlat') {
+      return CourseType.Practice;
+    } else {
+      return CourseType.Lecture;
+    }
+  }
 
-      getCourseType(type: string): CourseType {
-        if (type === 'gyakorlat') {
-            return CourseType.Practice;
-        } else {
-            return CourseType.Lecture;
-        }
-      }
+  getCourses(group: string, time: string, place: string, professor: string): ICourse {
+    return ({
+      groupId: Number(group),
+      time: this.getTime(time),
+      room: place,
+      professor: this.professor = {
+        name: professor,
+      },
+    });
+  }
 
-      getCourses(group: string, time: string, place: string, professor: string): ICourse {
-        return ({
-          groupId: Number(group),
-          time: this.getTime(time),
-          room: place,
-          professor: this.professor = {
-            name: professor,
-          },
-        });
-      }
+  getTime(time: string): ITime {
+    const text = time.split(' ');
+    const times = text[1].split('-');
+    return ({
+      day: this.getDay(text[0]),
+      startTime: times[0],
+      endTime: times[1],
+    });
+  }
 
-      getTime(time: string): ITime {
-        const text = time.split(' ');
-        const times = text[1].split('-');
-        return ({
-          day: this.getDay(text[0]),
-          startTime: times[0],
-          endTime: times[1],
-        });
-      }
+  getDay(day: string): Day {
+    switch (day.trim()) {
+      case 'Hétfo':
+        return Day.Monday;
+      case 'Kedd':
+        return Day.Tuesday;
+      case 'Szerda':
+        return Day.Wednesday;
+      case 'Csütörtök':
+        return Day.Thursday;
+      case 'Péntek':
+        return Day.Friday;
+    }
+  }
 
-      getDay(day: string): Day {
-        switch (day.trim()) {
-            case 'Hétfo':
-              return Day.Monday;
-            case 'Kedd':
-              return Day.Tuesday;
-            case 'Szerda':
-              return Day.Wednesday;
-            case 'Csütörtök':
-              return Day.Thursday;
-            case 'Péntek':
-              return Day.Friday;
-        }
-      }
+  getSearchSubject(): ISubject[] {
+    return this.searchSubjects;
+  }
 
-     getSearchSubject(): ISubject[] {
-       return this.searchSubjects;
-     }
+  addSubject(subject: ISubject) {
+    if (this.addSubjects.indexOf(subject) === -1) {
+      this.addSubjects.push(subject);
+    }
+  }
 
-      addSubject(subject: ISubject) {
-        if (this.addSubjects.indexOf(subject) === -1) {
-          this.addSubjects.push(subject);
-        }
-      }
-
-      getAddSubject(): ISubject[] {
-        return this.addSubjects;
-      }
+  getAddSubject(): ISubject[] {
+    return this.addSubjects;
+  }
 }

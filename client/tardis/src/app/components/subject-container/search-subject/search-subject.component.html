@@ -1,9 +1,10 @@
 <div>
-    Tárgy neve: <input [(ngModel)] = "search" name="search" />
-    <button class="btn btn-primary" (click)="getSubject(search)" [disabled]="!search">Elküld</button>
+    Tárgy neve:
+    <input [(ngModel)]="search" name="search" />
+    <button (click)="getSubject(search)" [disabled]="!search">Elküld</button>
+    
+
 </div>
-
-
-
-
-
+<div>
+        {{error}}
+</div>

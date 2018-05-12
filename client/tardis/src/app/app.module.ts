@@ -17,6 +17,7 @@ import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofess
 import { AddedSubjectTableComponent } from './components/subject-container/added-subject-table/added-subject-table.component';
 import { SearchSubjectComponent } from './components/subject-container/search-subject/search-subject.component';
 import { SearchedSubjectTableComponent } from './components/subject-container/searched-subject-table/searched-subject-table.component';
+import { SubjectContainerComponent } from './components/subject-container/subject-container.component';
 import {FreeTimeService} from './services/free-time.service';
 import {NotifierService} from './services/notifier.service';
 import {OptimalTimetablesService} from './services/optimal-timetables.service';
@@ -38,6 +39,7 @@ import { SubjectService } from './services/subject.service';
     SearchSubjectComponent,
     SearchedSubjectTableComponent,
     AddedSubjectTableComponent,
+    SubjectContainerComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,11 @@ export class SearchedSubjectTableComponent implements OnInit {
   hidden: boolean;
 
   constructor(private searchSubjectService: SubjectService) {
-    this.subjects = searchSubjectService.getSearchSubject();
+    try {
+      this.subjects = searchSubjectService.getSearchSubject();
+    } catch (Exception) {
+      this.subjects = [];
+    }
    }
 
   ngOnInit() {
