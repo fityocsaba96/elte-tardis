@@ -97,8 +97,6 @@ export class MarkmyprofessorRatingService {
         if (this.hasNextPage) {
           this.sendRequest(professorName, faculty);
         }
-      }, (err) => {
-        console.log(err);
       });
   }
 
