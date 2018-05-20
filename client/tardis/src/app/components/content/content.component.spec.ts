@@ -20,6 +20,9 @@ import {FreeTimeTableComponent} from '../free-time-table/free-time-table.compone
 import {LatestEndSettingsComponent} from '../latest-end-settings/latest-end-settings.component';
 import {LongestBreakSettingsComponent} from '../longest-break-settings/longest-break-settings.component';
 import {MarkmyprofessorRatingSettingsComponent} from '../markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
+import {OptimalTimetablesContainerComponent} from '../optimal-timetables-container/optimal-timetables-container.component';
+import {TimetablePaginatorComponent} from '../timetable-paginator/timetable-paginator.component';
+import {TimetableComponent} from '../timetable/timetable.component';
 import {ContentComponent} from './content.component';
 
 describe('ContentComponent', () => {
@@ -34,6 +37,9 @@ describe('ContentComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        OptimalTimetablesContainerComponent,
+        TimetableComponent,
+        TimetablePaginatorComponent,
         EarliestStartSettingsComponent,
         LatestEndSettingsComponent,
         LongestBreakSettingsComponent,

@@ -16,6 +16,9 @@ import {LatestEndSettingsComponent} from './components/latest-end-settings/lates
 import {LongestBreakSettingsComponent} from './components/longest-break-settings/longest-break-settings.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
+import {OptimalTimetablesContainerComponent} from './components/optimal-timetables-container/optimal-timetables-container.component';
+import {TimetablePaginatorComponent} from './components/timetable-paginator/timetable-paginator.component';
+import {TimetableComponent} from './components/timetable/timetable.component';
 import {EarliestStartService} from './services/earliest-start.service';
 import {FacultyService} from './services/faculty.service';
 import {FreeTimeService} from './services/free-time.service';
@@ -37,6 +40,9 @@ import {TimeService} from './services/time.service';
     AddFreeTimeComponent,
     FreeTimeTableComponent,
     FreeTimeSettingsComponent,
+    OptimalTimetablesContainerComponent,
+    TimetableComponent,
+    TimetablePaginatorComponent,
     EarliestStartSettingsComponent,
     LatestEndSettingsComponent,
     LongestBreakSettingsComponent,
