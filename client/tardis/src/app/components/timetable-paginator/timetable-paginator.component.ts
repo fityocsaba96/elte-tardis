@@ -20,7 +20,7 @@ export class TimetablePaginatorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['currentPage']) {
-      this.currentPage = changes['currentPage'].currentValue + 1;
+      this.currentPage = changes['currentPage'].currentValue;
     }
     if (changes['numberOfPages']) {
       this.numberOfPages = changes['numberOfPages'].currentValue;

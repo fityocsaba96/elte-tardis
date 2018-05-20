@@ -12,10 +12,10 @@
       </div>
       <div class="item">
         <app-timetable-paginator
-          [currentPage]="timetables.indexOf(selectedTimetable)"
+          [currentPage]="timetables.indexOf(selectedTimetable) + 1"
           [numberOfPages]="timetables.length"
-          (next)="next($event)"
-          (previous)="previous($event)">
+          (next)="next()"
+          (previous)="previous()">
         </app-timetable-paginator>
       </div>
     </div>
