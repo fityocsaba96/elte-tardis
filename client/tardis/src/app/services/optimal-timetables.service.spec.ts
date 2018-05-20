@@ -1,21 +1,27 @@
-import { inject, TestBed } from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {inject, TestBed} from '@angular/core/testing';
+import {CourseType} from '../models/CourseType';
+import {Day} from '../models/Day';
+import {ISubjects} from '../models/ISubjects';
+import {ITime} from '../models/ITime';
+import {EarliestStartService} from './earliest-start.service';
+import {FacultyService} from './faculty.service';
+import {FreeTimeService} from './free-time.service';
+import {LatestEndService} from './latest-end.service';
+import {LongestBreakService} from './longest-break.service';
+import {MarkmyprofessorRatingService} from './markmyprofessor-rating.service';
+import {NotifierService} from './notifier.service';
+import {OptimalTimetablesService} from './optimal-timetables.service';
+import {SubjectService} from './subject.service';
 
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { CourseType } from '../models/CourseType';
-import { Day } from '../models/Day';
-import { ISubjects } from '../models/ISubjects';
-import { ITime } from '../models/ITime';
-import { FacultyService } from './faculty.service';
-import { FreeTimeService } from './free-time.service';
-import { MarkmyprofessorRatingService } from './markmyprofessor-rating.service';
-import { NotifierService } from './notifier.service';
-import { OptimalTimetablesService } from './optimal-timetables.service';
-import { SubjectService } from './subject.service';
-
+// tslint:disable-next-line:no-big-function
 describe('OptimalTimetablesService', () => {
   let service: OptimalTimetablesService;
   let subjectService: SubjectService;
+  let earliestStartService: EarliestStartService;
+  let latestEndService: LatestEndService;
+  let longestBreakService: LongestBreakService;
 
   const exampleSubjects: ISubjects = {
     notConflicted: [
@@ -159,10 +165,16 @@ describe('OptimalTimetablesService', () => {
         FreeTimeService,
         SubjectService,
         NotifierService,
+        EarliestStartService,
+        LatestEndService,
+        LongestBreakService,
       ],
     });
     service = TestBed.get(OptimalTimetablesService);
     subjectService = TestBed.get(SubjectService);
+    earliestStartService = TestBed.get(EarliestStartService);
+    latestEndService = TestBed.get(LatestEndService);
+    longestBreakService = TestBed.get(LongestBreakService);
   });
 
   it('should be created', () => {
@@ -189,6 +201,43 @@ describe('OptimalTimetablesService', () => {
       service.generateOptimalTimetables().then((timetables) => {
         expect(timetables.length).toBe(6);
         done();
+      });
+    });
+
+    it('should return zero timetables when earliest start is set and there is a practice'
+      + ' where all groups start earlier than the earliest start', (done) => {
+      spyOnProperty(subjectService, 'subjects', 'get').and.returnValue(exampleSubjects);
+      earliestStartService.toggleApply();
+      const offset: number = (new Date()).getTimezoneOffset() * 60000;
+      earliestStartService.earliestStart = new Date(1526810700000 + offset);
+      service.generateOptimalTimetables().then((timetables) => {
+        expect(timetables.length).toBe(0);
+        done();
+      });
+    });
+
+    it('should return zero timetables when latest end is set and there is a practice'
+      + ' where all groups end later than the latest end', (done) => {
+      spyOnProperty(subjectService, 'subjects', 'get').and.returnValue(exampleSubjects);
+      latestEndService.toggleApply();
+      const offset: number = (new Date()).getTimezoneOffset() * 60000;
+      latestEndService.latestEnd = new Date(1526828100000 + offset);
+      service.generateOptimalTimetables().then((timetables) => {
+        expect(timetables.length).toBe(0);
+        done();
+      });
+    });
+
+    it('should return the same amount of timetables with and without the longest break condition applied'
+       + ' if none of the resulting timetables has any breaks', (done) => {
+      spyOnProperty(subjectService, 'subjects', 'get').and.returnValue(exampleSubjects);
+      service.generateOptimalTimetables().then((timetablesWithoutCondition) => {
+        longestBreakService.toggleApply();
+        longestBreakService.longestBreak = 0;
+        service.generateOptimalTimetables().then((timetablesWithCondition) => {
+          expect(timetablesWithoutCondition.length).toBe(timetablesWithCondition.length);
+          done();
+        });
       });
     });
   });

@@ -25,6 +25,6 @@ export class LatestEndService {
   }
 
   public meetsCondition(time: ITime): boolean {
-    return !this._latestEnd || !(time.endTime > this._latestEnd);
+    return this._latestEnd === undefined || !(time.endTime > this._latestEnd);
   }
 }

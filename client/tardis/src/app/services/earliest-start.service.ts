@@ -25,6 +25,6 @@ export class EarliestStartService {
   }
 
   public meetsCondition(time: ITime): boolean {
-    return !this._earliestStart || !(time.startTime < this._earliestStart);
+    return this._earliestStart === undefined || !(time.startTime < this._earliestStart);
   }
 }

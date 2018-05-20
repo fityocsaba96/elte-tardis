@@ -25,7 +25,7 @@ export class LongestBreakService {
   }
 
   public meetsCondition(timeA: ITime, timeB: ITime): boolean {
-    return !this._longestBreak
+    return this._longestBreak === undefined
       || (timeA.day !== timeB.day
       || (!(TimeService.addHours(timeA.endTime, this._longestBreak) < timeB.startTime)
       && !(TimeService.addHours(timeA.startTime, -this._longestBreak) > timeB.endTime)));
