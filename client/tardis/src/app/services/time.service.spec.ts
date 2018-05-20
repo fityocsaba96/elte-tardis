@@ -37,4 +37,14 @@ describe('TimeService', () => {
       expect(conflict).toBeTruthy();
     });
   });
+
+  describe('addHours', () => {
+    it('should return time string with added hours when the hours to add is positive', () => {
+      expect(TimeService.addHours('12:45', 2)).toBe('14:45');
+    });
+
+    it('should return time string with subtracted hours when the hours to add is negative', () => {
+      expect(TimeService.addHours('12:45', -2)).toBe('10:45');
+    });
+  });
 });

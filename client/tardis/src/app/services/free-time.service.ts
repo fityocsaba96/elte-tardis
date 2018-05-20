@@ -14,17 +14,13 @@ export class FreeTimeService {
     this._apply = false;
   }
 
-  private static dateToTimeString(date: Date): string {
-    return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  }
-
   private static parse(name: string, day: Day, startDate: Date, endDate: Date): IFreeTime {
     return {
       name,
       time: {
         day,
-        startTime: FreeTimeService.dateToTimeString(startDate),
-        endTime: FreeTimeService.dateToTimeString(endDate),
+        startTime: TimeService.dateToTimeString(startDate),
+        endTime: TimeService.dateToTimeString(endDate),
       },
     };
   }
