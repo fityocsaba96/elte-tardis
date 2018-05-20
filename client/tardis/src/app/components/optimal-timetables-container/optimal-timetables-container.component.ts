@@ -11,6 +11,7 @@ export class OptimalTimetablesContainerComponent implements OnInit {
 
   selectedTimetable: ITimetable;
   timetables: ITimetable[];
+  testTimetable: string;
 
   constructor(private optimalTimetablesService: OptimalTimetablesService) { }
 
@@ -22,14 +23,17 @@ export class OptimalTimetablesContainerComponent implements OnInit {
   async generateTimetables() { // test
     this.timetables = await this.optimalTimetablesService.generateOptimalTimetables();
     this.selectedTimetable = this.timetables[0];
+    this.testTimetable = JSON.stringify(this.selectedTimetable, null, 4);
   }
 
   next() {
     this.selectedTimetable = this.timetables[this.timetables.indexOf(this.selectedTimetable) + 1];
+    this.testTimetable = JSON.stringify(this.selectedTimetable, null, 4);
   }
 
   previous() {
     this.selectedTimetable = this.timetables[this.timetables.indexOf(this.selectedTimetable) - 1];
+    this.testTimetable = JSON.stringify(this.selectedTimetable, null, 4);
   }
 
 }
