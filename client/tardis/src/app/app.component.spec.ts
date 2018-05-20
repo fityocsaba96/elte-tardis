@@ -12,6 +12,7 @@ import {FreeTimeSettingsComponent} from './components/free-time-settings/free-ti
 import {FreeTimeTableComponent} from './components/free-time-table/free-time-table.component';
 import {HeaderComponent} from './components/header/header.component';
 import {LatestEndSettingsComponent} from './components/latest-end-settings/latest-end-settings.component';
+import {LongestBreakSettingsComponent} from './components/longest-break-settings/longest-break-settings.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {FacultyService} from './services/faculty.service';
@@ -31,6 +32,7 @@ describe('AppComponent', () => {
         FreeTimeSettingsComponent,
         EarliestStartSettingsComponent,
         LatestEndSettingsComponent,
+        LongestBreakSettingsComponent,
       ],
       imports: [
         BrowserModule,

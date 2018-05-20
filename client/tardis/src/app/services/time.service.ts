@@ -15,4 +15,11 @@ export class TimeService {
   public static dateToTimeString(date: Date): string {
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   }
+
+  public static addHours(time: string, hoursToAdd: number): string {
+    const pieces = time.split(':');
+    let hours: any = Number(pieces[0]) + hoursToAdd;
+    hours = hours < 10 ? `0${String(hours)}` : String(hours);
+    return `${hours}:${pieces[1]}`;
+  }
 }

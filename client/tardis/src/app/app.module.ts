@@ -13,12 +13,14 @@ import {FreeTimeSettingsComponent} from './components/free-time-settings/free-ti
 import {FreeTimeTableComponent} from './components/free-time-table/free-time-table.component';
 import {HeaderComponent} from './components/header/header.component';
 import {LatestEndSettingsComponent} from './components/latest-end-settings/latest-end-settings.component';
+import {LongestBreakSettingsComponent} from './components/longest-break-settings/longest-break-settings.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {EarliestStartService} from './services/earliest-start.service';
 import {FacultyService} from './services/faculty.service';
 import {FreeTimeService} from './services/free-time.service';
 import {LatestEndService} from './services/latest-end.service';
+import {LongestBreakService} from './services/longest-break.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 import {NotifierService} from './services/notifier.service';
 import {OptimalTimetablesService} from './services/optimal-timetables.service';
@@ -37,6 +39,7 @@ import {TimeService} from './services/time.service';
     FreeTimeSettingsComponent,
     EarliestStartSettingsComponent,
     LatestEndSettingsComponent,
+    LongestBreakSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import {TimeService} from './services/time.service';
     TimeService,
     EarliestStartService,
     LatestEndService,
+    LongestBreakService,
   ],
   bootstrap: [AppComponent],
 })
