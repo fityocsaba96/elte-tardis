@@ -42,19 +42,11 @@ describe('MarkmyprofessorRatingSettingsComponent', () => {
   });
 
   describe('updateRating', () => {
-    it('should set the rating in the service if applied', () => {
+    it('should set the rating in the service', () => {
       spyOn(service, 'setMinimumRating');
-      component.isApplied = true;
       component.minimumRating = 4;
       component.updateRating();
       expect(service.setMinimumRating).toHaveBeenCalledWith(component.minimumRating);
     });
-    it('should not set the rating if it not applied', () => {
-      spyOn(service, 'setMinimumRating');
-      component.isApplied = false;
-      component.updateRating();
-      expect(service.setMinimumRating).not.toHaveBeenCalled();
-    });
   });
-
 });

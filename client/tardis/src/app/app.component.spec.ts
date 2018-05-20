@@ -6,6 +6,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {AppComponent} from './app.component';
 import {AddFreeTimeComponent} from './components/add-free-time/add-free-time.component';
 import {ContentComponent} from './components/content/content.component';
+import {EarliestStartSettingsComponent} from './components/earliest-start-settings/earliest-start-settings.component';
 import {ExtraConditionsContainerComponent} from './components/extra-conditions-container/extra-conditions-container.component';
 import {FreeTimeSettingsComponent} from './components/free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from './components/free-time-table/free-time-table.component';
@@ -27,6 +28,7 @@ describe('AppComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        EarliestStartSettingsComponent,
       ],
       imports: [
         BrowserModule,

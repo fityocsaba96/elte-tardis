@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+.narrow-input {
+    width: 120px;
+}
+
+.ui.selection.dropdown {
+    min-width: unset !important;
+}

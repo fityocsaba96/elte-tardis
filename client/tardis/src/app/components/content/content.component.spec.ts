@@ -3,6 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
+import {EarliestStartService} from '../../services/earliest-start.service';
 import {FacultyService} from '../../services/faculty.service';
 import {FreeTimeService} from '../../services/free-time.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
@@ -10,6 +11,7 @@ import {NotifierService} from '../../services/notifier.service';
 import {OptimalTimetablesService} from '../../services/optimal-timetables.service';
 import {SubjectService} from '../../services/subject.service';
 import {AddFreeTimeComponent} from '../add-free-time/add-free-time.component';
+import {EarliestStartSettingsComponent} from '../earliest-start-settings/earliest-start-settings.component';
 import {ExtraConditionsContainerComponent} from '../extra-conditions-container/extra-conditions-container.component';
 import {FreeTimeSettingsComponent} from '../free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from '../free-time-table/free-time-table.component';
@@ -28,6 +30,7 @@ describe('ContentComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        EarliestStartSettingsComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
       providers: [
@@ -37,6 +40,7 @@ describe('ContentComponent', () => {
         NotifierService,
         SubjectService,
         OptimalTimetablesService,
+        EarliestStartService,
       ],
     })
       .compileComponents();
