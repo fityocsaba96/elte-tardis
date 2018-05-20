@@ -6,6 +6,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {EarliestStartService} from '../../services/earliest-start.service';
 import {FacultyService} from '../../services/faculty.service';
 import {FreeTimeService} from '../../services/free-time.service';
+import {LatestEndService} from '../../services/latest-end.service';
 import {MarkmyprofessorRatingService} from '../../services/markmyprofessor-rating.service';
 import {NotifierService} from '../../services/notifier.service';
 import {OptimalTimetablesService} from '../../services/optimal-timetables.service';
@@ -15,6 +16,7 @@ import {EarliestStartSettingsComponent} from '../earliest-start-settings/earlies
 import {ExtraConditionsContainerComponent} from '../extra-conditions-container/extra-conditions-container.component';
 import {FreeTimeSettingsComponent} from '../free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from '../free-time-table/free-time-table.component';
+import {LatestEndSettingsComponent} from '../latest-end-settings/latest-end-settings.component';
 import {MarkmyprofessorRatingSettingsComponent} from '../markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {ContentComponent} from './content.component';
 
@@ -31,6 +33,7 @@ describe('ContentComponent', () => {
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
         EarliestStartSettingsComponent,
+        LatestEndSettingsComponent,
       ],
       imports: [HttpClientModule, FormsModule, SuiModule],
       providers: [
@@ -41,6 +44,7 @@ describe('ContentComponent', () => {
         SubjectService,
         OptimalTimetablesService,
         EarliestStartService,
+        LatestEndService,
       ],
     })
       .compileComponents();

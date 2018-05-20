@@ -3,7 +3,6 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {EarliestStartService} from '../../services/earliest-start.service';
-import {FreeTimeService} from '../../services/free-time.service';
 import {EarliestStartSettingsComponent} from './earliest-start-settings.component';
 
 describe('EarliestStartSettingsComponent', () => {

@@ -3,17 +3,17 @@ import {ITime} from '../models/ITime';
 import {TimeService} from './time.service';
 
 @Injectable()
-export class EarliestStartService {
+export class LatestEndService {
 
-  private _earliestStart: string;
+  private _latestEnd: string;
   private _apply: boolean;
 
   constructor() {
     this._apply = false;
   }
 
-  public set earliestStart(earliestStart: Date) {
-    this._earliestStart = TimeService.dateToTimeString(earliestStart);
+  public set latestEnd(latestEnd: Date) {
+    this._latestEnd = TimeService.dateToTimeString(latestEnd);
   }
 
   public toggleApply(): void {
@@ -25,6 +25,6 @@ export class EarliestStartService {
   }
 
   public meetsCondition(time: ITime): boolean {
-    return !this._earliestStart || !(time.startTime < this._earliestStart);
+    return !this._latestEnd || !(time.endTime > this._latestEnd);
   }
 }

@@ -12,11 +12,13 @@ import {ExtraConditionsContainerComponent} from './components/extra-conditions-c
 import {FreeTimeSettingsComponent} from './components/free-time-settings/free-time-settings.component';
 import {FreeTimeTableComponent} from './components/free-time-table/free-time-table.component';
 import {HeaderComponent} from './components/header/header.component';
+import {LatestEndSettingsComponent} from './components/latest-end-settings/latest-end-settings.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {EarliestStartService} from './services/earliest-start.service';
 import {FacultyService} from './services/faculty.service';
 import {FreeTimeService} from './services/free-time.service';
+import {LatestEndService} from './services/latest-end.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
 import {NotifierService} from './services/notifier.service';
 import {OptimalTimetablesService} from './services/optimal-timetables.service';
@@ -34,6 +36,7 @@ import {TimeService} from './services/time.service';
     FreeTimeTableComponent,
     FreeTimeSettingsComponent,
     EarliestStartSettingsComponent,
+    LatestEndSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import {TimeService} from './services/time.service';
     SubjectService,
     TimeService,
     EarliestStartService,
+    LatestEndService,
   ],
   bootstrap: [AppComponent],
 })
