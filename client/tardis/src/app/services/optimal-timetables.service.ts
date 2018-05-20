@@ -88,7 +88,10 @@ export class OptimalTimetablesService {
           }
         });
         for (let i = 0; i < allDates.length - 1; i++) {
-          allPairsConditionOk = allPairsConditionOk && this.longestBreakService.meetsCondition(allDates[i], allDates[i + 1]);
+          if (!this.longestBreakService.meetsCondition(allDates[i], allDates[i + 1])) {
+            allPairsConditionOk = false;
+            break;
+          }
         }
         if (allPairsConditionOk) {
           newTimetables.push(timetable);

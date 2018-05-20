@@ -3,8 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SuiModule } from 'ng2-semantic-ui';
+import { EarliestStartService } from '../../services/earliest-start.service';
 import { FacultyService } from '../../services/faculty.service';
 import { FreeTimeService } from '../../services/free-time.service';
+import { LatestEndService } from '../../services/latest-end.service';
+import { LongestBreakService } from '../../services/longest-break.service';
 import { MarkmyprofessorRatingService } from '../../services/markmyprofessor-rating.service';
 import { NotifierService } from '../../services/notifier.service';
 import { OptimalTimetablesService } from '../../services/optimal-timetables.service';
@@ -32,6 +35,9 @@ describe('OptimalTimetablesContainerComponent', () => {
         MarkmyprofessorRatingService,
         FacultyService,
         NotifierService,
+        EarliestStartService,
+        LatestEndService,
+        LongestBreakService,
       ],
     })
     .compileComponents();
