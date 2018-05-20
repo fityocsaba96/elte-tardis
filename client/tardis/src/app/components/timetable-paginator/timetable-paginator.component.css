@@ -1,0 +1,10 @@
+.paginator {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.counter {
+    margin-left: 20px;
+    margin-right: 20px;
+}

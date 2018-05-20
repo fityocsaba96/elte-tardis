@@ -13,6 +13,9 @@ import {FreeTimeTableComponent} from './components/free-time-table/free-time-tab
 import {HeaderComponent} from './components/header/header.component';
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
+import {OptimalTimetablesContainerComponent} from './components/optimal-timetables-container/optimal-timetables-container.component';
+import {TimetablePaginatorComponent} from './components/timetable-paginator/timetable-paginator.component';
+import {TimetableComponent} from './components/timetable/timetable.component';
 import {FacultyService} from './services/faculty.service';
 import {FreeTimeService} from './services/free-time.service';
 import {MarkmyprofessorRatingService} from './services/markmyprofessor-rating.service';
@@ -31,6 +34,9 @@ import {TimeService} from './services/time.service';
     AddFreeTimeComponent,
     FreeTimeTableComponent,
     FreeTimeSettingsComponent,
+    OptimalTimetablesContainerComponent,
+    TimetableComponent,
+    TimetablePaginatorComponent,
   ],
   imports: [
     BrowserModule,

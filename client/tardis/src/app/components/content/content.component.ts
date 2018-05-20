@@ -11,18 +11,12 @@ import {SubjectService} from '../../services/subject.service';
 export class ContentComponent implements OnInit {
 
   subjects: string;
-  timetables: string;
 
-  constructor(private subjectService: SubjectService,
-              private optimalTimetablesService: OptimalTimetablesService) {
+  constructor(private subjectService: SubjectService) {
   }
 
   ngOnInit() {
     this.subjects = JSON.stringify(this.subjectService.subjects, null, 4); // test data
   }
 
-  async generateTimetables() { // test
-    const timetables = await this.optimalTimetablesService.generateOptimalTimetables();
-    this.timetables = JSON.stringify(timetables, null, 4);
-  }
 }
