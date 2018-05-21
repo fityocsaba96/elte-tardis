@@ -26,9 +26,7 @@ export class SearchSubjectComponent implements OnInit {
         this.error = '';
       } catch (Exception) {
         this.error = 'Nincs ilyen tárgy';
-        throw new Error();
       }
-    }, (err) => {
-          });
+    });
   }
 }

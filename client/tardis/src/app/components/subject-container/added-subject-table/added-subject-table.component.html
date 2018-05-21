@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table>
     <tbody *ngFor="let subject of notConflicted" (click)="addToConflicts(subject)">
         <tr>
             <td>{{ subject.name }}</td>
@@ -12,7 +12,7 @@
     </tbody>
 </table>
 
-<table class="table table-hover">
+<table>
     <tbody *ngFor="let subject of conflicted" (click)="addToNotConflicts(subject)">
         <tr>
             <td>{{ subject.name }}</td>

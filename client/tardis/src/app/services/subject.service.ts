@@ -12,17 +12,15 @@ import { ITime } from '../models/ITime';
 @Injectable()
 export class SubjectService {
 
-  searchSubjects: ISubject[];
-  addSubjects: ISubject[];
-  parser: DOMParser;
-  courses: ICourse[];
-  professor: IProfessor;
-  semester: string;
+  private searchSubjects: ISubject[];
+  private addSubjects: ISubject[];
+  private courses: ICourse[];
+  private professor: IProfessor;
+  private semester: string;
 
   private _subjects: ISubjects;
 
   constructor(private http: HttpClient) {
-    this.parser = new DOMParser();
     this.addSubjects = [];
     this.searchSubjects = [];
     this.courses = [];
@@ -160,16 +158,7 @@ export class SubjectService {
     };
   }
 
-  setSemester() {
-    const date = new Date();
-    if (date.getMonth() > 4) {
-      this.semester = (date.getFullYear() + '-' + (date.getFullYear() + 1) + '-' + '1');
-    } else {
-      this.semester = ((date.getFullYear() - 1) + '-' + date.getFullYear() + '-' + '2');
-    }
-  }
-
-  getData(search: string) {
+  public getData(search: string) {
     return this.http.get('/ttk-to.php',
       {
         responseType: 'text',
@@ -179,8 +168,8 @@ export class SubjectService {
       });
   }
 
-  parseHtml(html: string) {
-    const document = this.parser.parseFromString(html, 'text/html');
+  public parseHtml(html: string) {
+    const document = new DOMParser().parseFromString(html, 'text/html');
     const table = document.querySelector('tbody');
     if (table == null) {
       return;
@@ -208,7 +197,31 @@ export class SubjectService {
       throw new Error();
     }
   }
-  getCourseType(type: string): CourseType {
+
+  public getSearchSubject(): ISubject[] {
+    return this.searchSubjects;
+  }
+
+  public addSubject(subject: ISubject) {
+    if (this.addSubjects.indexOf(subject) === -1) {
+      this.addSubjects.push(subject);
+    }
+  }
+
+  public getAddSubject(): ISubject[] {
+    return this.addSubjects;
+  }
+
+  private setSemester() {
+    const date = new Date();
+    if (date.getMonth() > 5) {
+      this.semester = (date.getFullYear() + '-' + (date.getFullYear() + 1) + '-' + '1');
+    } else {
+      this.semester = ((date.getFullYear() - 1) + '-' + date.getFullYear() + '-' + '2');
+    }
+  }
+
+  private getCourseType(type: string): CourseType {
     if (type === 'gyakorlat') {
       return CourseType.Practice;
     } else {
@@ -216,7 +229,7 @@ export class SubjectService {
     }
   }
 
-  getCourses(group: string, time: string, place: string, professor: string): ICourse {
+  private getCourses(group: string, time: string, place: string, professor: string): ICourse {
     return ({
       groupId: Number(group),
       time: this.getTime(time),
@@ -227,7 +240,7 @@ export class SubjectService {
     });
   }
 
-  getTime(time: string): ITime {
+  private getTime(time: string): ITime {
     const text = time.split(' ');
     const times = text[1].split('-');
     return ({
@@ -237,7 +250,7 @@ export class SubjectService {
     });
   }
 
-  getDay(day: string): Day {
+  private getDay(day: string): Day {
     switch (day.trim()) {
       case 'Hétfo':
         return Day.Monday;
@@ -250,20 +263,6 @@ export class SubjectService {
       case 'Péntek':
         return Day.Friday;
     }
-  }
-
-  getSearchSubject(): ISubject[] {
-    return this.searchSubjects;
-  }
-
-  addSubject(subject: ISubject) {
-    if (this.addSubjects.indexOf(subject) === -1) {
-      this.addSubjects.push(subject);
-    }
-  }
-
-  getAddSubject(): ISubject[] {
-    return this.addSubjects;
   }
 
   public get subjects(): ISubjects {
