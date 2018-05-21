@@ -1,0 +1,14 @@
+<div class="ui list">
+  <div class="item">
+    <sui-checkbox [(ngModel)]="isChecked" (ngModelChange)="changeChecked()">Legkorábbi napi kezdés</sui-checkbox>
+  </div>
+  <div class="item">
+    <div class="ui labeled input">
+      <div class="ui label">Kezdés</div>
+      <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input suiDatepicker class="narrow-input" name="earliest-start" (pickerSelectedDateChange)="updateEarliestStart($event)" pickerMode="time" [pickerUseNativeOnMobile]="false">
+      </div>
+    </div>
+  </div>
+</div>

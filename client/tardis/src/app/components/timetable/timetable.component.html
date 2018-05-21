@@ -1,0 +1,18 @@
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let day of days">{{day | titlecase}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let interval of intervals">
+      <td>{{interval}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

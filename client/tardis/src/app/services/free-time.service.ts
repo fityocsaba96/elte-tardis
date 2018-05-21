@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Day} from '../models/Day';
 import {IFreeTime} from '../models/IFreeTime';
-import {ITimetableCourse} from '../models/ITimetableCourse';
-import {OptimalTimetablesService} from './optimal-timetables.service';
+import {TimeService} from './time.service';
 
 @Injectable()
 export class FreeTimeService {
@@ -15,17 +14,13 @@ export class FreeTimeService {
     this._apply = false;
   }
 
-  private static dateToTimeString(date: Date): string {
-    return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  }
-
   private static parse(name: string, day: Day, startDate: Date, endDate: Date): IFreeTime {
     return {
       name,
       time: {
         day,
-        startTime: FreeTimeService.dateToTimeString(startDate),
-        endTime: FreeTimeService.dateToTimeString(endDate),
+        startTime: TimeService.dateToTimeString(startDate),
+        endTime: TimeService.dateToTimeString(endDate),
       },
     };
   }
@@ -33,7 +28,7 @@ export class FreeTimeService {
   public isValid(name: string, day: Day, startDate: Date, endDate: Date): boolean {
     if (name && name.length !== 0 && day && startDate && endDate && startDate < endDate) {
       const currentFreeTime: IFreeTime = FreeTimeService.parse(name, day, startDate, endDate);
-      return this._freeTimes.every((freeTime: IFreeTime) => !OptimalTimetablesService.conflicts(currentFreeTime.time, freeTime.time));
+      return this._freeTimes.every((freeTime: IFreeTime) => !TimeService.conflicts(currentFreeTime.time, freeTime.time));
     }
     return false;
   }

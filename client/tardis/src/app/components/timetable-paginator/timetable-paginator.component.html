@@ -1,0 +1,5 @@
+<div class="paginator">
+  <button class="ui button" (click)="clickPrevious()" [disabled]="currentPage <= 1">Előző</button>
+  <span class="counter">{{currentPage}}/{{numberOfPages}}</span>
+  <button class="ui button" (click)="clickNext()" [disabled]="currentPage === numberOfPages">Következő</button>  
+</div>

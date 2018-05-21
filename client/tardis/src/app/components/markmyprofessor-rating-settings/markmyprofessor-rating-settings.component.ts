@@ -19,13 +19,11 @@ export class MarkmyprofessorRatingSettingsComponent implements OnInit {
   }
 
   setApplied() {
-    this.markMyProfessorService.setMinimumRating(this.minimumRating && this.isApplied ? this.minimumRating : 0);
+    this.markMyProfessorService.toggleApply();
   }
 
   updateRating() {
-    if (this.isApplied) {
-      this.markMyProfessorService.setMinimumRating(this.minimumRating);
-    }
+    this.markMyProfessorService.setMinimumRating(this.minimumRating);
   }
 
 }

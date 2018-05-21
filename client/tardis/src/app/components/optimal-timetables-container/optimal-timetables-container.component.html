@@ -1,0 +1,27 @@
+<div class="optimal-timetables-content">
+  <button class="ui button" (click)="generateTimetables()">Összes optimális órarend előállítása</button>
+</div>
+<div class="optimal-timetables-container">
+  <div class="optimal-timetables-header">
+    Optimális órarendek
+  </div>
+  <div class="optimal-timetables-content">
+    <div class="ui list">
+      <div class="item">
+        <app-timetable [timetable]="selectedTimetable"></app-timetable>
+      </div>
+      <div class="item">
+        <app-timetable-paginator
+          [currentPage]="timetables.indexOf(selectedTimetable) + 1"
+          [numberOfPages]="timetables.length"
+          (next)="next()"
+          (previous)="previous()">
+        </app-timetable-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui segment"> <!--test data-->
+  <p><strong style="color: red">TEST</strong></p>
+  <pre>{{ testTimetable }}</pre>
+</div>

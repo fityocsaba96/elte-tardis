@@ -27,4 +27,14 @@ describe('NotifierService', () => {
       service.notifyFreeTimeAdded(freeTime);
     });
   });
+
+  describe('notifyMarkmyprofessorRatingFound', () => {
+    it('should notify the subscribed object', () => {
+      const meets = true;
+      service.markmyprofessorRatingFound.subscribe((value) => {
+        expect(value).toBe(meets);
+      });
+      service.notifyMarkmyprofessorRatingFound(meets);
+    });
+  });
 });

@@ -3,7 +3,7 @@ import { IProfessor } from './IProfessor';
 import { ITime } from './ITime';
 
 export interface ITimetableCourse {
-  subjectName: string;
+  name: string;
   groupId: number;
   courseType: CourseType;
   time: ITime;
