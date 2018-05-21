@@ -1,0 +1,27 @@
+<table>
+    <tbody *ngFor="let subject of notConflicted" (click)="addToConflicts(subject)">
+        <tr>
+            <td>{{ subject.name }}</td>
+            <td>{{ subject.courseType }}</td>
+            <td>{{ subject.code }}</td>
+            <td>
+                <button (click)="addToConflicts(subject)">Ütközhet</button>
+                <button (click)="deleteSubjectFromAddTable(subject)">Töröl</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody *ngFor="let subject of conflicted" (click)="addToNotConflicts(subject)">
+        <tr>
+            <td>{{ subject.name }}</td>
+            <td>{{ subject.courseType }}</td>
+            <td>{{ subject.code }}</td>
+            <td>
+                <button (click)="addToNotConflicts(subject)">Mégse ütközhet</button>
+                <button (click)="deleteSubjectFromAddTable(subject)">Töröl</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

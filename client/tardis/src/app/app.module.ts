@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {SuiModule} from 'ng2-semantic-ui';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { SuiModule } from 'ng2-semantic-ui';
 
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {AddFreeTimeComponent} from './components/add-free-time/add-free-time.component';
 import {ContentComponent} from './components/content/content.component';
@@ -17,6 +17,10 @@ import {LongestBreakSettingsComponent} from './components/longest-break-settings
 // tslint:disable-next-line:max-line-length
 import {MarkmyprofessorRatingSettingsComponent} from './components/markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {OptimalTimetablesContainerComponent} from './components/optimal-timetables-container/optimal-timetables-container.component';
+import { AddedSubjectTableComponent } from './components/subject-container/added-subject-table/added-subject-table.component';
+import { SearchSubjectComponent } from './components/subject-container/search-subject/search-subject.component';
+import { SearchedSubjectTableComponent } from './components/subject-container/searched-subject-table/searched-subject-table.component';
+import { SubjectContainerComponent } from './components/subject-container/subject-container.component';
 import {TimetablePaginatorComponent} from './components/timetable-paginator/timetable-paginator.component';
 import {TimetableComponent} from './components/timetable/timetable.component';
 import {EarliestStartService} from './services/earliest-start.service';
@@ -40,6 +44,10 @@ import {TimeService} from './services/time.service';
     AddFreeTimeComponent,
     FreeTimeTableComponent,
     FreeTimeSettingsComponent,
+    SearchSubjectComponent,
+    SearchedSubjectTableComponent,
+    AddedSubjectTableComponent,
+    SubjectContainerComponent,
     OptimalTimetablesContainerComponent,
     TimetableComponent,
     TimetablePaginatorComponent,

@@ -1,7 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ISubjects} from '../../models/ISubjects';
-import {OptimalTimetablesService} from '../../services/optimal-timetables.service';
-import {SubjectService} from '../../services/subject.service';
 
 @Component({
   selector: 'app-content',
@@ -10,13 +7,10 @@ import {SubjectService} from '../../services/subject.service';
 })
 export class ContentComponent implements OnInit {
 
-  subjects: string;
-
-  constructor(private subjectService: SubjectService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.subjects = JSON.stringify(this.subjectService.subjects, null, 4); // test data
   }
 
 }

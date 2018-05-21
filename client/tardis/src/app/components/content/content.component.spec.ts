@@ -21,6 +21,10 @@ import {LatestEndSettingsComponent} from '../latest-end-settings/latest-end-sett
 import {LongestBreakSettingsComponent} from '../longest-break-settings/longest-break-settings.component';
 import {MarkmyprofessorRatingSettingsComponent} from '../markmyprofessor-rating-settings/markmyprofessor-rating-settings.component';
 import {OptimalTimetablesContainerComponent} from '../optimal-timetables-container/optimal-timetables-container.component';
+import { AddedSubjectTableComponent } from '../subject-container/added-subject-table/added-subject-table.component';
+import { SearchSubjectComponent } from '../subject-container/search-subject/search-subject.component';
+import { SearchedSubjectTableComponent } from '../subject-container/searched-subject-table/searched-subject-table.component';
+import { SubjectContainerComponent } from '../subject-container/subject-container.component';
 import {TimetablePaginatorComponent} from '../timetable-paginator/timetable-paginator.component';
 import {TimetableComponent} from '../timetable/timetable.component';
 import {ContentComponent} from './content.component';
@@ -37,6 +41,10 @@ describe('ContentComponent', () => {
         AddFreeTimeComponent,
         FreeTimeTableComponent,
         FreeTimeSettingsComponent,
+        AddedSubjectTableComponent,
+        SearchSubjectComponent,
+        SearchedSubjectTableComponent,
+        SubjectContainerComponent,
         OptimalTimetablesContainerComponent,
         TimetableComponent,
         TimetablePaginatorComponent,
